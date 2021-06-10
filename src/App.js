@@ -1,127 +1,234 @@
-import { useState } from 'react';
+import { useRef, useState, memo } from "react";
 import "./App.css";
-import { Container, Row, Col, Form, Button} from "react-bootstrap"
 import Signature from "./components/Signature/Signature";
-
+import { Grid, Box, Typography, TextField, Button } from "@material-ui/core";
 
 function App() {
-    const [fullName, setFullName] = useState("John Doe");
-    const [jobTitle, setJobTitle] = useState('Web Designer');
-    const [department, setDepartment] = useState("Marketing");
-    const [officeNumber, setOfficeNumber] = useState("123.456.7890");
-    const [officeExt, setOfficeExt] = useState('123')
-    const [email, setEmail] = useState("john.doe@m-v-t.com")
+	const signatureRef = useRef();
+	const [fullName, setFullName] = useState();
+	const [jobTitle, setJobTitle] = useState();
+	const [department, setDepartment] = useState();
+	const [cellNumber, setCellNumber] = useState();
+	const [officeNumber, setOfficeNumber] = useState();
+	const [officeExt, setOfficeExt] = useState();
+	const [email, setEmail] = useState();
 
-    const fullNameHandler = (e) => {
-        if (!e.target.value) {
-            console.log(!e.target.value)
-            return setFullName("John Doe")
-        }
-
-        setFullName(e.target.value)
-    }
-
-    const jobTitleHandler = (e) => {
-        if (!e.target.value) {
-            return setJobTitle("Web Designer")
-        }
-
-        setJobTitle(e.target.value)
-    }
-
-    const departmentHandler = (e) => {
-        if (!e.target.value) {
-           return  setDepartment("Marketing")
-        }
-
-        setDepartment(e.target.value)
-    }
-
-    const officeNumberHandler = (e) => {
-        if (!e.target.value) {
-            return setOfficeNumber("123.456.7890")
-        }
-
-        setOfficeNumber(e.target.value)
-    }
-    
-    const officeExtHandler = (e) => {
-        if (!e.target.value) {
-            return setOfficeExt("1234")
-        }
-
-        setOfficeExt(e.target.value)
-    }
-    
-    const emailHandler = (e) => {
-        e.preventDefault()
-
-        if (!e.target.value) {
-            return setEmail("john.doe@m-v-t.com")
-        }
-
-        setEmail(e.target.value)
-    }
-
-
-    console.log(fullName)
+	const handleClick = () => {
+		const copyBoxElement = signatureRef.current;
+		copyBoxElement.contentEditable = true;
+		copyBoxElement.focus();
+		document.execCommand("selectAll");
+		document.execCommand("copy");
+		copyBoxElement.contentEditable = false;
+		getSelection().empty();
+	};
 
 	return (
-        <Container fluid>
-            <Row className="vh-100">
-                <Col md={4} className="left-panel">
-                    <h4 className="left-panel__heading">Basic signature details</h4>
-                    <Form>
-                        <Form.Group>
-                            <Form.Label>Full Name</Form.Label>
-                            <Form.Control type="text" placeholder="John Doe" onChange={fullNameHandler}  />
-                        </Form.Group>
-                         <Form.Group>
-                             <Row>
-                                <Col>
-                                    <Form.Label>Job Title</Form.Label>
-                                    <Form.Control type="text" placeholder="Web Developer" onChange={jobTitleHandler} />
-                                </Col>
-                                <Col>
-                                    <Form.Label>Department</Form.Label>
-                                    <Form.Control placeholder="Department" onChange={departmentHandler} />
-                                </Col>
-                            </Row>
-                        </Form.Group>
-                        <Form.Group>
-                             <Row>
-                                <Col>
-                                    <Form.Label>Office</Form.Label>
-                                    <Form.Control placeholder="123.456.7890" onChange={officeNumberHandler} />
-                                </Col>
-                                <Col>
-                                    <Form.Label>Ext</Form.Label>
-                                    <Form.Control placeholder="1234" onChange={officeExtHandler} />
-                                </Col>
-                            </Row>
-                        </Form.Group>
-                        <Form.Group>
-                            <Form.Label>Email address</Form.Label>
-                            <Form.Control type="email" placeholder="john.doe@company.com" onChange={emailHandler} />
-                        </Form.Group>
-                        <Button variant="primary" type="submit">
-                            Generate Signature
-                        </Button>
-                    </Form>
-                </Col>
-                <Col md={8} className="right-panel">
-                    <Signature 
-                        fullName={fullName}
-                        jobTitle={jobTitle}
-                        department={department}
-                        officeNumber={officeNumber}
-                        officeExt={officeExt}
-                        email={email}
-                    />
-                </Col>
-            </Row>
-        </Container>   
-    );
+		<Grid
+			container
+			style={{
+				height: "100vh",
+			}}
+		>
+			{/* Left side */}
+			<Grid item md={3}>
+				<Box p={4}>
+					<Typography variant="h5" style={{ fontWeight: "bold" }}>
+						Signature Details
+					</Typography>
+					<TextField
+						id="standard-full-width"
+						label="Full Name"
+						placeholder="John Doe"
+						style={{ marginTop: 25 }}
+						InputLabelProps={{
+							shrink: true,
+						}}
+						fullWidth
+						onChange={(e) => setFullName(e.target.value)}
+					/>
+
+					<TextField
+						id="standard-full-width"
+						label="Job Title"
+						placeholder="Web Designer"
+						fullWidth
+						style={{ marginTop: 25 }}
+						InputLabelProps={{
+							shrink: true,
+						}}
+						onChange={(e) => setJobTitle(e.target.value)}
+					/>
+
+					<TextField
+						id="standard-full-width"
+						label="Department"
+						placeholder="Marketing"
+						fullWidth
+						style={{ marginTop: 25 }}
+						InputLabelProps={{
+							shrink: true,
+						}}
+						onChange={(e) => setDepartment(e.target.value)}
+					/>
+
+					<TextField
+						id="standard-full-width"
+						label="Cell Number (optional)"
+						placeholder="123.456.7890"
+						fullWidth
+						style={{ marginTop: 25 }}
+						InputLabelProps={{
+							shrink: true,
+						}}
+						onChange={(e) => setCellNumber(e.target.value)}
+					/>
+
+					<TextField
+						id="standard-full-width"
+						label="Office Number"
+						placeholder="123.456.7890"
+						fullWidth
+						style={{ marginTop: 25 }}
+						InputLabelProps={{
+							shrink: true,
+						}}
+						onChange={(e) => setOfficeNumber(e.target.value)}
+					/>
+
+					<TextField
+						id="standard-full-width"
+						label="Ext"
+						placeholder="1234"
+						fullWidth
+						style={{ marginTop: 25 }}
+						InputLabelProps={{
+							shrink: true,
+						}}
+						onChange={(e) => setOfficeExt(e.target.value)}
+					/>
+
+					<TextField
+						id="standard-full-width"
+						label="Email"
+						placeholder="john.doe@m-v-t.com"
+						fullWidth
+						style={{ marginTop: 25 }}
+						InputLabelProps={{
+							shrink: true,
+						}}
+						onChange={(e) => setEmail(e.target.value)}
+					/>
+				</Box>
+			</Grid>
+
+			{/* Right side */}
+			<Grid
+				item
+				md={9}
+				style={{ backgroundColor: "rgb(240,240,240)", padding: "20px" }}
+			>
+				{/* First Bar */}
+				<div
+					style={{
+						display: "flex",
+						flexDirection: "row",
+						padding: "1rem",
+						backgroundColor: "rgb(51, 71, 91)",
+						borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
+						borderRadius: "8px 8px 0px 0px",
+					}}
+				>
+					{[
+						"rgb(242, 84, 91)",
+						"rgb(245, 194, 107)",
+						"rgb(0, 189, 165)",
+					].map((bc, i) => (
+						<div
+							key={i}
+							style={{
+								height: "0.5rem",
+								width: "0.5rem",
+								borderRadius: "50%",
+								marginRight: "0.5rem",
+								backgroundColor: bc,
+							}}
+						/>
+					))}
+				</div>
+				{/* Second Bar */}
+				<div
+					style={{
+						display: "flex",
+						flexDirection: "column",
+						padding: "1rem 2rem",
+						fontWeight: "500",
+						color: "rgb(255, 255, 255)",
+						backgroundColor: "rgb(51, 71, 91)",
+					}}
+				>
+					<Typography variant="subtitle2">
+						To: Your Recipient
+					</Typography>
+					<Typography variant="subtitle2">
+						Subject: Check out my new Email Signature
+					</Typography>
+				</div>
+				{/* Mail Content Area */}
+				<div
+					style={{
+						backgroundColor: "#fff",
+						height: "450px",
+						display: "flex",
+						flexDirection: "column",
+						padding: "30px 20px",
+						justifyContent: "space-between",
+						marginBottom: "10px",
+					}}
+				>
+					<GhostLines />
+					<Signature
+						signatureRef={signatureRef}
+						signatureDetails={{
+							fullName,
+							jobTitle,
+							department,
+							cellNumber,
+							officeNumber,
+							officeExt,
+							email,
+						}}
+					/>
+				</div>
+				<Button
+					onClick={handleClick}
+					variant="contained"
+					style={{ backgroundColor: "#00bda5", color: "#fff" }}
+					fullWidth
+				>
+					Copy Singature
+				</Button>
+			</Grid>
+		</Grid>
+	);
 }
 
 export default App;
+
+const GhostLines = memo(() => {
+	return (
+		<div>
+			{[1, 2, 3, 4, 5, 6, 7].map((_, i) => (
+				<div
+					key={i}
+					style={{
+						height: "10px",
+						backgroundColor: "#E0E0E0",
+						width: Math.floor(Math.random() * 500) + 150,
+						marginBottom: "15px",
+					}}
+				/>
+			))}
+		</div>
+	);
+});

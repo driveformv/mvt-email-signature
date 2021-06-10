@@ -1,11 +1,4 @@
-.left-panel {
-    padding: 3rem;
-}
-
-.left-panel__heading {
-    font-weight: 700;
-}
-
-.right-panel {
-    background-color: rgb(240, 240, 240);
+/* Global */
+body {
+	margin: 0;
 }

@@ -2,7 +2,7 @@ import React from "react";
 
 const PositionAndDepartment = ({ jobTitle, department }) => {
 	return (
-		<tr style={styles.tr}>
+		<tr>
 			<td style={styles.td}>
 				{jobTitle} | {department}
 			</td>
@@ -11,16 +11,14 @@ const PositionAndDepartment = ({ jobTitle, department }) => {
 };
 
 const styles = {
-    tr: {
-        marginBottom: "2pt" 
-    },
-    td: {
-        fontFamily: "Arial, sanserif", 
-        fontWeight: "bold", 
-        fontSize: "10pt", 
-        lineHeight: "12pt", 
-        color: "#c02125"
-    }
-}
+	td: {
+		fontFamily: "Arial, sanserif",
+		fontWeight: "bold",
+		fontSize: "10pt",
+		lineHeight: "10pt",
+		color: "#c02125",
+		paddingBottom: "2.5pt",
+	},
+};
 
 export default PositionAndDepartment;

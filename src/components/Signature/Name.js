@@ -2,24 +2,20 @@ import React from "react";
 
 const Name = ({ fullName }) => {
 	return (
-		<tr style={styles.tr}>
-			<td style={styles.td}>
-				<span style={styles.td}>{fullName}</span>
-			</td>
+		<tr>
+			<td style={styles.td}>{fullName}</td>
 		</tr>
 	);
 };
 
 const styles = {
-    tr: { 
-        marginBottom: "2pt",
-        fontFamily: "Arial, sans-serif" 
-    },
-    td: {
-        fontWeight: "bold", 
-        fontSize: "14pt", 
-        lineHeight: "16pt" 
-    }
-}
+	td: {
+		fontFamily: "Arial, sans-serif",
+		fontWeight: "bold",
+		fontSize: "14pt",
+		lineHeight: "14pt",
+		paddingBottom: "2pt",
+	},
+};
 
 export default Name;

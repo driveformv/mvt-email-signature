@@ -1,51 +1,82 @@
-import { useRef } from "react";
 import ContactDetails from "./ContactDetails";
 import Logo from "./Logo";
 import Name from "./Name";
 import PositionAndDepartment from "./PositionAndDepartment";
-import Quote from "./Quote";
+import Website from "./Website";
 import SocialMediaIcons from "./SocialMediaIcons";
 
-const Signature = (props) => {
-    const { fullName, jobTitle, department, officeNumber, officeExt, email } = props;
-
-	const handleClick = () => {
-		const copyBoxElement = signatureRef.current;
-		copyBoxElement.contentEditable = true;
-		copyBoxElement.focus();
-		document.execCommand("selectAll");
-		document.execCommand("copy");
-		copyBoxElement.contentEditable = false;
-		getSelection().empty();
-	};
-	const signatureRef = useRef();
+const Signature = ({ signatureRef, signatureDetails }) => {
+	const {
+		fullName,
+		jobTitle,
+		department,
+		cellNumber,
+		officeNumber,
+		officeExt,
+		email,
+	} = signatureDetails;
 
 	return (
-		<>
-			<button onClick={handleClick}>copy</button>
-			<div ref={signatureRef}>
-				<table cellPadding="0" cellSpacing="0" style={{ backgroundColor: "white"}}>
-					<tbody>
-						<tr>
-							<td style={{ borderRight: "3px solid #c02125", padding: "0 20px" }}>
-								<Logo />
-							</td>
-							<td style={{ paddingLeft: "20px" }}>
-								<table cellPadding="0" cellSpacing="0">
-									<tbody>
-										<Name fullName={fullName} />
-										<PositionAndDepartment jobTitle={jobTitle} department={department} />
-										<ContactDetails officeNumber={officeNumber} officeExt={officeExt} email={email} />
-										<Quote />
-										<SocialMediaIcons />
-									</tbody>
-								</table>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</>
+		<div ref={signatureRef}>
+			<table
+				cellPadding="0"
+				cellSpacing="0"
+				style={{ backgroundColor: "white", width: "525px" }}
+			>
+				<tbody>
+					<tr>
+						<td
+							width="80"
+							rowSpan={6}
+							style={{
+								borderRight: "3px solid #c02125",
+								padding: "0 20px",
+								width: "80",
+							}}
+						>
+							<Logo />
+						</td>
+						<td style={{ paddingLeft: "20px" }}>
+							<table cellPadding="0" cellSpacing="0">
+								<tbody>
+									<Name
+										fullName={
+											fullName ? fullName : "John Doe"
+										}
+									/>
+									<PositionAndDepartment
+										jobTitle={
+											jobTitle ? jobTitle : "Web Designer"
+										}
+										department={
+											department
+												? department
+												: "Marketing"
+										}
+									/>
+									<ContactDetails
+										officeNumber={
+											officeNumber
+												? officeNumber
+												: "123.456.7890"
+										}
+										cellNumber={cellNumber}
+										officeExt={
+											officeExt ? officeExt : "1234"
+										}
+										email={
+											email ? email : "john.doe@m-v-t.com"
+										}
+									/>
+									<Website />
+									<SocialMediaIcons />
+								</tbody>
+							</table>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 	);
 };
 

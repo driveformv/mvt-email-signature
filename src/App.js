@@ -92,7 +92,7 @@ function App() {
 					/>
 
 					<PhoneInput
-						label="Cell Number"
+						label="Cell Number (Optional)"
 						value={cellNumber}
 						setState={setCellNumber}
 					/>

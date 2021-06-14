@@ -37,7 +37,6 @@ function App() {
 						Signature Details
 					</Typography>
 					<TextField
-						id="standard-full-width"
 						label="Full Name"
 						placeholder="John Doe"
 						style={{ marginTop: 25 }}
@@ -49,7 +48,6 @@ function App() {
 					/>
 
 					<TextField
-						id="standard-full-width"
 						label="Job Title"
 						placeholder="Web Designer"
 						fullWidth
@@ -61,7 +59,6 @@ function App() {
 					/>
 
 					<TextField
-						id="standard-full-width"
 						label="Department"
 						placeholder="Marketing"
 						fullWidth
@@ -73,7 +70,6 @@ function App() {
 					/>
 
 					<TextField
-						id="standard-full-width"
 						label="Cell Number (optional)"
 						placeholder="123.456.7890"
 						fullWidth
@@ -85,7 +81,6 @@ function App() {
 					/>
 
 					<TextField
-						id="standard-full-width"
 						label="Office Number"
 						placeholder="123.456.7890"
 						fullWidth
@@ -97,7 +92,6 @@ function App() {
 					/>
 
 					<TextField
-						id="standard-full-width"
 						label="Ext"
 						placeholder="1234"
 						fullWidth
@@ -109,7 +103,6 @@ function App() {
 					/>
 
 					<TextField
-						id="standard-full-width"
 						label="Email"
 						placeholder="john.doe@m-v-t.com"
 						fullWidth
@@ -178,7 +171,7 @@ function App() {
 				<div
 					style={{
 						backgroundColor: "#fff",
-						height: "450px",
+						height: "50%",
 						display: "flex",
 						flexDirection: "column",
 						padding: "30px 20px",

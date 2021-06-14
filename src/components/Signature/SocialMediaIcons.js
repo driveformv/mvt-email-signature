@@ -6,7 +6,7 @@ const SocialMediaIcons = () => {
 			<td>
 				<span>
 					<a
-						href="https://business.facebook.com/mesillavalleytransport/notifications/?business_id=241217472880476"
+						href="https://www.facebook.com/mesillavalleytransport/"
 						target="_blank"
 						rel="noreferrer"
 					>
@@ -20,7 +20,7 @@ const SocialMediaIcons = () => {
 				</span>
 				<span>
 					<a
-						href="https://twitter.com/notifications/mentions"
+						href="https://twitter.com/MVTServices"
 						target="_blank"
 						rel="noreferrer"
 					>
@@ -34,7 +34,7 @@ const SocialMediaIcons = () => {
 				</span>
 				<span>
 					<a
-						href="https://www.youtube.com/"
+						href="https://www.youtube.com/channel/UCANz_NAedSbFwiBrkZ8c5nA"
 						target="_blank"
 						rel="noreferrer"
 					>
@@ -48,7 +48,7 @@ const SocialMediaIcons = () => {
 				</span>
 				<span>
 					<a
-						href="https://www.linkedin.com/company/1669917/admin/notifications/all/"
+						href="https://www.linkedin.com/company/m-v-t/"
 						target="_blank"
 						rel="noreferrer"
 					>

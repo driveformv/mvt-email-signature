@@ -2,18 +2,21 @@ import { useRef, useState, memo } from "react";
 import "./App.css";
 import Signature from "./components/Signature/Signature";
 import { Grid, Box, Typography, TextField, Button } from "@material-ui/core";
+import Alert from "@material-ui/lab/Alert";
 
 function App() {
 	const signatureRef = useRef();
-	const [fullName, setFullName] = useState();
-	const [jobTitle, setJobTitle] = useState();
-	const [department, setDepartment] = useState();
-	const [cellNumber, setCellNumber] = useState();
-	const [officeNumber, setOfficeNumber] = useState();
-	const [officeExt, setOfficeExt] = useState();
-	const [email, setEmail] = useState();
+	const [fullName, setFullName] = useState("");
+	const [jobTitle, setJobTitle] = useState("");
+	const [department, setDepartment] = useState("");
+	const [cellNumber, setCellNumber] = useState("");
+	const [officeNumber, setOfficeNumber] = useState("");
+	const [officeExt, setOfficeExt] = useState("");
+	const [email, setEmail] = useState("");
+	const [isAlertVisible, setIsAlertVisible] = useState(false);
 
 	const handleClick = () => {
+		setIsAlertVisible(true);
 		const copyBoxElement = signatureRef.current;
 		copyBoxElement.contentEditable = true;
 		copyBoxElement.focus();
@@ -21,6 +24,20 @@ function App() {
 		document.execCommand("copy");
 		copyBoxElement.contentEditable = false;
 		getSelection().empty();
+
+		setTimeout(() => {
+			setIsAlertVisible(false);
+		}, 3000);
+	};
+
+	const resetFieldsHandler = () => {
+		setFullName("");
+		setJobTitle("");
+		setDepartment("");
+		setCellNumber("");
+		setOfficeNumber("");
+		setOfficeExt("");
+		setEmail("");
 	};
 
 	return (
@@ -44,6 +61,7 @@ function App() {
 							shrink: true,
 						}}
 						fullWidth
+						value={fullName}
 						onChange={(e) => setFullName(e.target.value)}
 					/>
 
@@ -55,6 +73,7 @@ function App() {
 						InputLabelProps={{
 							shrink: true,
 						}}
+						value={jobTitle}
 						onChange={(e) => setJobTitle(e.target.value)}
 					/>
 
@@ -66,6 +85,7 @@ function App() {
 						InputLabelProps={{
 							shrink: true,
 						}}
+						value={department}
 						onChange={(e) => setDepartment(e.target.value)}
 					/>
 
@@ -77,6 +97,7 @@ function App() {
 						InputLabelProps={{
 							shrink: true,
 						}}
+						value={cellNumber}
 						onChange={(e) => setCellNumber(e.target.value)}
 					/>
 
@@ -88,6 +109,7 @@ function App() {
 						InputLabelProps={{
 							shrink: true,
 						}}
+						value={officeNumber}
 						onChange={(e) => setOfficeNumber(e.target.value)}
 					/>
 
@@ -99,6 +121,7 @@ function App() {
 						InputLabelProps={{
 							shrink: true,
 						}}
+						value={officeExt}
 						onChange={(e) => setOfficeExt(e.target.value)}
 					/>
 
@@ -110,8 +133,21 @@ function App() {
 						InputLabelProps={{
 							shrink: true,
 						}}
+						value={email}
 						onChange={(e) => setEmail(e.target.value)}
 					/>
+					<Button
+						variant="contained"
+						style={{
+							backgroundColor: "rgb(242, 84, 91)",
+							color: "#fff",
+							marginTop: 25,
+						}}
+						fullWidth
+						onClick={resetFieldsHandler}
+					>
+						Reset
+					</Button>
 				</Box>
 			</Grid>
 
@@ -119,8 +155,20 @@ function App() {
 			<Grid
 				item
 				md={9}
-				style={{ backgroundColor: "rgb(240,240,240)", padding: "20px" }}
+				style={{
+					backgroundColor: "rgb(240,240,240)",
+					padding: "20px",
+				}}
 			>
+				{isAlertVisible && (
+					<Alert
+						severity="info"
+						style={{ position: "absolute", right: "20px" }}
+					>
+						Successully copied your new signature
+					</Alert>
+				)}
+
 				{/* First Bar */}
 				<div
 					style={{

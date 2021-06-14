@@ -24,8 +24,7 @@ const ContactDetails = ({ cellNumber, officeNumber, officeExt, email }) => {
 					</span>
 				</td>
 			</tr>
-
-			{cellNumber && (
+			{cellNumber ? (
 				<tr>
 					<td
 						style={{
@@ -43,7 +42,7 @@ const ContactDetails = ({ cellNumber, officeNumber, officeExt, email }) => {
 						</span>
 					</td>
 				</tr>
-			)}
+			) : null}
 			<tr>
 				<td
 					style={{

@@ -1,6 +1,6 @@
 import { TextField } from "@material-ui/core";
 
-function phoneInputComponent({ value, setState }) {
+function phoneInputComponent({ label, value, setState }) {
 	const handleInput = (e) => {
 		// this is where we'll call our future formatPhoneNumber function that we haven't written yet.
 		const formattedPhoneNumber = formatPhoneNumber(e.target.value);
@@ -39,7 +39,7 @@ function phoneInputComponent({ value, setState }) {
 
 	return (
 		<TextField
-			label="Office Number"
+			label={label}
 			placeholder="123.456.7890"
 			fullWidth
 			style={{ marginTop: 25 }}

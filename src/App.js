@@ -91,9 +91,14 @@ function App() {
 						onChange={(e) => setDepartment(e.target.value)}
 					/>
 
-					<PhoneInput value={cellNumber} setState={setCellNumber} />
+					<PhoneInput
+						label="Cell Number"
+						value={cellNumber}
+						setState={setCellNumber}
+					/>
 
 					<PhoneInput
+						label="Office Number"
 						value={officeNumber}
 						setState={setOfficeNumber}
 					/>

@@ -4,6 +4,8 @@ import Signature from "./components/Signature/Signature";
 import { Grid, Box, Typography, TextField, Button } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
 
+import PhoneInput from "./components/PhoneInput";
+
 function App() {
 	const signatureRef = useRef();
 	const [fullName, setFullName] = useState("");
@@ -89,28 +91,11 @@ function App() {
 						onChange={(e) => setDepartment(e.target.value)}
 					/>
 
-					<TextField
-						label="Cell Number (optional)"
-						placeholder="123.456.7890"
-						fullWidth
-						style={{ marginTop: 25 }}
-						InputLabelProps={{
-							shrink: true,
-						}}
-						value={cellNumber}
-						onChange={(e) => setCellNumber(e.target.value)}
-					/>
+					<PhoneInput value={cellNumber} setState={setCellNumber} />
 
-					<TextField
-						label="Office Number"
-						placeholder="123.456.7890"
-						fullWidth
-						style={{ marginTop: 25 }}
-						InputLabelProps={{
-							shrink: true,
-						}}
+					<PhoneInput
 						value={officeNumber}
-						onChange={(e) => setOfficeNumber(e.target.value)}
+						setState={setOfficeNumber}
 					/>
 
 					<TextField

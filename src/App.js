@@ -7,7 +7,6 @@ import Alert from "@material-ui/lab/Alert";
 import PhoneInput from "./components/PhoneInput";
 
 function App() {
-	const signatureRef = useRef();
 	const [fullName, setFullName] = useState("");
 	const [jobTitle, setJobTitle] = useState("");
 	const [department, setDepartment] = useState("");
@@ -16,6 +15,9 @@ function App() {
 	const [officeExt, setOfficeExt] = useState("");
 	const [email, setEmail] = useState("");
 	const [isAlertVisible, setIsAlertVisible] = useState(false);
+
+	const formRef = useRef();
+	const signatureRef = useRef();
 
 	const handleClick = () => {
 		setIsAlertVisible(true);
@@ -32,112 +34,157 @@ function App() {
 		}, 3000);
 	};
 
+	const generateSignatureHandler = (e) => {
+		e.preventDefault();
+		const {
+			fullName,
+			jobTitle,
+			department,
+			cellNumber,
+			officeNumber,
+			ext,
+			email,
+		} = formRef.current;
+
+		setFullName(fullName.value);
+		setJobTitle(jobTitle.value);
+		setDepartment(department.value);
+		setCellNumber(cellNumber.value);
+		setOfficeNumber(officeNumber.value);
+		setOfficeExt(ext.value);
+		setEmail(email.value);
+	};
+
 	const resetFieldsHandler = () => {
-		setFullName("");
-		setJobTitle("");
-		setDepartment("");
-		setCellNumber("");
-		setOfficeNumber("");
-		setOfficeExt("");
-		setEmail("");
+		const {
+			fullName,
+			jobTitle,
+			department,
+			cellNumber,
+			officeNumber,
+			ext,
+			email,
+		} = formRef.current;
+
+		fullName.value = "";
+		jobTitle.value = "";
+		department.value = "";
+		cellNumber.value = "";
+		officeNumber.value = "";
+		ext.value = "";
+		email.value = "";
 	};
 
 	return (
-		<Grid
-			container
-			style={{
-				height: "100vh",
-			}}
-		>
+		<Grid container style={{ height: "100vh" }}>
 			{/* Left side */}
 			<Grid item md={3}>
 				<Box p={4}>
-					<Typography variant="h5" style={{ fontWeight: "bold" }}>
+					<Typography
+						variant="h5"
+						style={{ fontWeight: "500", color: "#4a515d" }}
+					>
 						Signature Details
 					</Typography>
-					<TextField
-						label="Full Name"
-						placeholder="John Doe"
-						style={{ marginTop: 25 }}
-						InputLabelProps={{
-							shrink: true,
-						}}
-						fullWidth
-						value={fullName}
-						onChange={(e) => setFullName(e.target.value)}
-					/>
-
-					<TextField
-						label="Job Title"
-						placeholder="Web Designer"
-						fullWidth
-						style={{ marginTop: 25 }}
-						InputLabelProps={{
-							shrink: true,
-						}}
-						value={jobTitle}
-						onChange={(e) => setJobTitle(e.target.value)}
-					/>
-
-					<TextField
-						label="Department"
-						placeholder="Marketing"
-						fullWidth
-						style={{ marginTop: 25 }}
-						InputLabelProps={{
-							shrink: true,
-						}}
-						value={department}
-						onChange={(e) => setDepartment(e.target.value)}
-					/>
-
-					<PhoneInput
-						label="Cell Number (Optional)"
-						value={cellNumber}
-						setState={setCellNumber}
-					/>
-
-					<PhoneInput
-						label="Office Number"
-						value={officeNumber}
-						setState={setOfficeNumber}
-					/>
-
-					<TextField
-						label="Ext"
-						placeholder="1234"
-						fullWidth
-						style={{ marginTop: 25 }}
-						InputLabelProps={{
-							shrink: true,
-						}}
-						value={officeExt}
-						onChange={(e) => setOfficeExt(e.target.value)}
-					/>
-
-					<TextField
-						label="Email"
-						placeholder="john.doe@m-v-t.com"
-						fullWidth
-						style={{ marginTop: 25 }}
-						InputLabelProps={{
-							shrink: true,
-						}}
-						value={email}
-						onChange={(e) => setEmail(e.target.value)}
-					/>
-					<Button
-						variant="contained"
-						style={{
-							backgroundColor: "rgb(242, 84, 91)",
-							color: "#fff",
-							marginTop: 25,
-						}}
-						fullWidth
-						onClick={resetFieldsHandler}
+					<form
+						ref={formRef}
+						onReset={resetFieldsHandler}
+						onSubmit={generateSignatureHandler}
 					>
-						Reset
-					</Button>
+						<TextField
+							name="fullName"
+							label="Full Name"
+							placeholder="John Doe"
+							style={{ marginTop: 15 }}
+							InputLabelProps={{
+								shrink: true,
+							}}
+							fullWidth
+							required
+						/>
+						<TextField
+							name="jobTitle"
+							label="Job Title"
+							placeholder="Web Designer"
+							fullWidth
+							style={{ marginTop: 15 }}
+							InputLabelProps={{
+								shrink: true,
+							}}
+							required
+						/>
+						<TextField
+							name="department"
+							label="Department"
+							placeholder="Marketing"
+							fullWidth
+							style={{ marginTop: 15 }}
+							InputLabelProps={{
+								shrink: true,
+							}}
+							required
+						/>
+						<TextField
+							name="email"
+							label="Email"
+							placeholder="john.doe@m-v-t.com"
+							fullWidth
+							style={{ marginTop: 15 }}
+							InputLabelProps={{
+								shrink: true,
+							}}
+							required
+						/>
+						<PhoneInput
+							name="officeNumber"
+							label="Office Number"
+							placeholder="123.456.7890"
+							style={{ marginTop: 15 }}
+							required
+							fullWidth
+							InputLabelProps={{
+								shrink: true,
+							}}
+						/>
+						<TextField
+							name="ext"
+							label="Ext (optional)"
+							placeholder="1234"
+							fullWidth
+							style={{ marginTop: 15 }}
+							InputLabelProps={{
+								shrink: true,
+							}}
+						/>
+						<PhoneInput
+							name="cellNumber"
+							label="Cell Number (optional)"
+							placeholder="123.456.7890"
+							style={{ marginTop: 15 }}
+							fullWidth
+							InputLabelProps={{
+								shrink: true,
+							}}
+						/>
+						<Button
+							variant="contained"
+							color="primary"
+							style={{ marginTop: 15 }}
+							fullWidth
+							type="submit"
+						>
+							Generate Signature
+						</Button>
+						<Button
+							variant="contained"
+							color="secondary"
+							style={{ marginTop: 15 }}
+							fullWidth
+							onClick={resetFieldsHandler}
+						>
+							Reset
+						</Button>
+					</form>
 				</Box>
 			</Grid>
 
@@ -148,12 +195,18 @@ function App() {
 				style={{
 					backgroundColor: "rgb(240,240,240)",
 					padding: "20px",
+					position: "relative",
 				}}
 			>
 				{isAlertVisible && (
 					<Alert
-						severity="info"
-						style={{ position: "absolute", right: "20px" }}
+						severity="success"
+						variant="filled"
+						style={{
+							position: "absolute",
+							right: 20,
+							left: 20,
+						}}
 					>
 						Successully copied your new signature
 					</Alert>
@@ -165,7 +218,7 @@ function App() {
 						display: "flex",
 						flexDirection: "row",
 						padding: "1rem",
-						backgroundColor: "rgb(51, 71, 91)",
+						backgroundColor: "#4a515d",
 						borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
 						borderRadius: "8px 8px 0px 0px",
 					}}
@@ -195,7 +248,7 @@ function App() {
 						padding: "1rem 2rem",
 						fontWeight: "500",
 						color: "rgb(255, 255, 255)",
-						backgroundColor: "rgb(51, 71, 91)",
+						backgroundColor: "#4a515d",
 					}}
 				>
 					<Typography variant="subtitle2">
@@ -234,7 +287,7 @@ function App() {
 				<Button
 					onClick={handleClick}
 					variant="contained"
-					style={{ backgroundColor: "#00bda5", color: "#fff" }}
+					color="primary"
 					fullWidth
 				>
 					Copy Singature

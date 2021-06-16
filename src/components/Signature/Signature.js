@@ -41,17 +41,19 @@ const Signature = ({ signatureRef, signatureDetails }) => {
 								<tbody>
 									<Name
 										fullName={
-											fullName ? fullName : "John Doe"
+											fullName
+												? fullName
+												: "Your Full Name"
 										}
 									/>
 									<PositionAndDepartment
 										jobTitle={
-											jobTitle ? jobTitle : "Web Designer"
+											jobTitle ? jobTitle : "Your Title"
 										}
 										department={
 											department
 												? department
-												: "Marketing"
+												: "Your Department"
 										}
 									/>
 									<ContactDetails
@@ -61,11 +63,11 @@ const Signature = ({ signatureRef, signatureDetails }) => {
 												: "123.456.7890"
 										}
 										cellNumber={cellNumber}
-										officeExt={
-											officeExt ? officeExt : "1234"
-										}
+										officeExt={officeExt}
 										email={
-											email ? email : "john.doe@m-v-t.com"
+											email
+												? email
+												: "youremail@m-v-t.com"
 										}
 									/>
 									<Website />

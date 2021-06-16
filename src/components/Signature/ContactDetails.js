@@ -16,12 +16,14 @@ const ContactDetails = ({ cellNumber, officeNumber, officeExt, email }) => {
 						<strong style={{ color: "#c02125" }}>Office: </strong>
 						{officeNumber}{" "}
 					</span>
-					<span>
-						<span style={{ color: "#c02125" }}>
-							<strong>Ext: </strong>
+					{officeExt ? (
+						<span>
+							<span style={{ color: "#c02125" }}>
+								<strong>Ext: </strong>
+							</span>
+							{officeExt}
 						</span>
-						{officeExt}
-					</span>
+					) : null}
 				</td>
 			</tr>
 			{cellNumber ? (

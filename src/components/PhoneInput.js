@@ -1,11 +1,14 @@
+import { useState } from "react";
 import { TextField } from "@material-ui/core";
 
-function phoneInputComponent({ label, value, setState }) {
+const PhoneInput = ({ ...rest }) => {
+	const [number, setNumber] = useState("");
+
 	const handleInput = (e) => {
 		// this is where we'll call our future formatPhoneNumber function that we haven't written yet.
 		const formattedPhoneNumber = formatPhoneNumber(e.target.value);
 		// we'll set the input value using our setInputValue
-		setState(formattedPhoneNumber);
+		setNumber(formattedPhoneNumber);
 	};
 
 	function formatPhoneNumber(value) {
@@ -37,19 +40,7 @@ function phoneInputComponent({ label, value, setState }) {
 		)}.${phoneNumber.slice(6, 10)}`;
 	}
 
-	return (
-		<TextField
-			label={label}
-			placeholder="123.456.7890"
-			fullWidth
-			style={{ marginTop: 25 }}
-			InputLabelProps={{
-				shrink: true,
-			}}
-			value={value}
-			onChange={handleInput}
-		/>
-	);
-}
+	return <TextField value={number} onChange={handleInput} {...rest} />;
+};
 
-export default phoneInputComponent;
+export default PhoneInput;

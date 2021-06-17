@@ -1,10 +1,12 @@
 import { useRef, useState, memo } from "react";
-import "./App.css";
-import Signature from "./components/Signature/Signature";
-import { Grid, Box, Typography, TextField, Button } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
+import { Grid, Box, Typography, TextField, Button } from "@material-ui/core";
 
-import PhoneInput from "./components/PhoneInput";
+import Signature from "./components/Signature/Signature";
+
+import "./App.css";
+
+import PhoneNumberInput from "./components/PhoneNumberInput";
 
 function App() {
 	const [fullName, setFullName] = useState("");
@@ -53,6 +55,30 @@ function App() {
 		setOfficeNumber(officeNumber.value);
 		setOfficeExt(ext.value);
 		setEmail(email.value);
+
+		// Save user signature details to excel
+		fetch("https://api.apispreadsheets.com/data/14266/", {
+			method: "POST",
+			body: JSON.stringify({
+				data: {
+					fullName: fullName.value,
+					jobTitle: jobTitle.value,
+					department: department.value,
+					email: email.value,
+					officeNumber: officeNumber.value,
+					ext: ext.value,
+					cellNumber: cellNumber.value,
+				},
+			}),
+		}).then((res) => {
+			if (res.status === 201) {
+				// SUCCESS
+				console.log("Successfully saved data");
+			} else {
+				// ERROR
+				console.log("Error saving data");
+			}
+		});
 	};
 
 	const resetFieldsHandler = () => {
@@ -96,9 +122,7 @@ function App() {
 							label="Full Name"
 							placeholder="John Doe"
 							style={{ marginTop: 15 }}
-							InputLabelProps={{
-								shrink: true,
-							}}
+							InputLabelProps={{ shrink: true }}
 							fullWidth
 							required
 						/>
@@ -106,45 +130,37 @@ function App() {
 							name="jobTitle"
 							label="Job Title"
 							placeholder="Web Designer"
-							fullWidth
 							style={{ marginTop: 15 }}
-							InputLabelProps={{
-								shrink: true,
-							}}
+							InputLabelProps={{ shrink: true }}
+							fullWidth
 							required
 						/>
 						<TextField
 							name="department"
 							label="Department"
 							placeholder="Marketing"
-							fullWidth
 							style={{ marginTop: 15 }}
-							InputLabelProps={{
-								shrink: true,
-							}}
+							InputLabelProps={{ shrink: true }}
+							fullWidth
 							required
 						/>
 						<TextField
 							name="email"
 							label="Email"
 							placeholder="john.doe@m-v-t.com"
-							fullWidth
 							style={{ marginTop: 15 }}
-							InputLabelProps={{
-								shrink: true,
-							}}
+							InputLabelProps={{ shrink: true }}
+							fullWidth
 							required
 						/>
-						<PhoneInput
+						<PhoneNumberInput
 							name="officeNumber"
 							label="Office Number"
 							placeholder="123.456.7890"
 							style={{ marginTop: 15 }}
-							required
+							InputLabelProps={{ shrink: true }}
 							fullWidth
-							InputLabelProps={{
-								shrink: true,
-							}}
+							required
 						/>
 						<TextField
 							name="ext"
@@ -152,19 +168,15 @@ function App() {
 							placeholder="1234"
 							fullWidth
 							style={{ marginTop: 15 }}
-							InputLabelProps={{
-								shrink: true,
-							}}
+							InputLabelProps={{ shrink: true }}
 						/>
-						<PhoneInput
+						<PhoneNumberInput
 							name="cellNumber"
 							label="Cell Number (optional)"
 							placeholder="123.456.7890"
 							style={{ marginTop: 15 }}
 							fullWidth
-							InputLabelProps={{
-								shrink: true,
-							}}
+							InputLabelProps={{ shrink: true }}
 						/>
 						<Button
 							variant="contained"

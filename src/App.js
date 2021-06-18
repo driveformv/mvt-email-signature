@@ -129,7 +129,7 @@ function App() {
 						<TextField
 							name="jobTitle"
 							label="Job Title"
-							placeholder="Web Designer"
+							placeholder="Your Title"
 							style={{ marginTop: 15 }}
 							InputLabelProps={{ shrink: true }}
 							fullWidth
@@ -138,7 +138,7 @@ function App() {
 						<TextField
 							name="department"
 							label="Department"
-							placeholder="Marketing"
+							placeholder="Your Department"
 							style={{ marginTop: 15 }}
 							InputLabelProps={{ shrink: true }}
 							fullWidth
@@ -156,7 +156,7 @@ function App() {
 						<PhoneNumberInput
 							name="officeNumber"
 							label="Office Number"
-							placeholder="123.456.7890"
+							placeholder="915.791.4000"
 							style={{ marginTop: 15 }}
 							InputLabelProps={{ shrink: true }}
 							fullWidth

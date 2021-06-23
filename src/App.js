@@ -1,6 +1,13 @@
 import { useRef, useState, memo } from "react";
 import Alert from "@material-ui/lab/Alert";
-import { Grid, Box, Typography, TextField, Button } from "@material-ui/core";
+import {
+	Grid,
+	Box,
+	Typography,
+	TextField,
+	Button,
+	useMediaQuery,
+} from "@material-ui/core";
 
 import Signature from "./components/Signature/Signature";
 
@@ -20,6 +27,8 @@ function App() {
 
 	const formRef = useRef();
 	const signatureRef = useRef();
+
+	const matches = useMediaQuery("(max-width:1024px)");
 
 	const handleClick = () => {
 		setIsAlertVisible(true);
@@ -102,209 +111,245 @@ function App() {
 	};
 
 	return (
-		<Grid container style={{ height: "100vh" }}>
-			{/* Left side */}
-			<Grid item md={3}>
-				<Box p={4}>
+		<Grid
+			container
+			style={{
+				height: "100vh",
+			}}
+		>
+			{/* Mobile */}
+			{matches ? (
+				<Grid
+					item
+					sm={12}
+					style={{
+						display: "flex",
+						alignItems: "center",
+						justifyContent: "center",
+						backgroundImage:
+							"linear-gradient(to right bottom, #0060a8, #0060a8, #0060a8, #0060a8, #0060a8, #0067ae, #006fb4, #0076ba, #0086c6, #0096d2, #00a7dc, #00b7e5)",
+					}}
+				>
 					<Typography
-						variant="h5"
-						style={{ fontWeight: "500", color: "#4a515d" }}
+						variant="h6"
+						style={{
+							textAlign: "center",
+							width: "75%",
+							color: "#fff",
+						}}
 					>
-						Signature Details
+						Mesilla Valley Transportation email signature generator
+						not available on mobile. Please navigate to our desktop
+						version.
 					</Typography>
-					<form
-						ref={formRef}
-						onReset={resetFieldsHandler}
-						onSubmit={generateSignatureHandler}
+				</Grid>
+			) : (
+				<>
+					{/* Left side */}
+					<Grid item md={3}>
+						<Box p={4}>
+							<Typography
+								variant="h5"
+								style={{ fontWeight: "500", color: "#4a515d" }}
+							>
+								Signature Details
+							</Typography>
+							<form
+								ref={formRef}
+								onReset={resetFieldsHandler}
+								onSubmit={generateSignatureHandler}
+							>
+								<TextField
+									name="fullName"
+									label="Full Name"
+									placeholder="John Doe"
+									style={{ marginTop: 15 }}
+									InputLabelProps={{ shrink: true }}
+									fullWidth
+									required
+								/>
+								<TextField
+									name="jobTitle"
+									label="Job Title"
+									placeholder="Your Title"
+									style={{ marginTop: 15 }}
+									InputLabelProps={{ shrink: true }}
+									fullWidth
+									required
+								/>
+								<TextField
+									name="department"
+									label="Department"
+									placeholder="Your Department"
+									style={{ marginTop: 15 }}
+									InputLabelProps={{ shrink: true }}
+									fullWidth
+									required
+								/>
+								<TextField
+									name="email"
+									label="Email"
+									placeholder="john.doe@m-v-t.com"
+									style={{ marginTop: 15 }}
+									InputLabelProps={{ shrink: true }}
+									fullWidth
+									required
+								/>
+								<PhoneNumberInput
+									name="officeNumber"
+									label="Office Number"
+									placeholder="915.791.4000"
+									style={{ marginTop: 15 }}
+									InputLabelProps={{ shrink: true }}
+									fullWidth
+									required
+								/>
+								<TextField
+									name="ext"
+									label="Ext (optional)"
+									placeholder="1234"
+									fullWidth
+									style={{ marginTop: 15 }}
+									InputLabelProps={{ shrink: true }}
+								/>
+								<PhoneNumberInput
+									name="cellNumber"
+									label="Cell Number (optional)"
+									placeholder="123.456.7890"
+									style={{ marginTop: 15 }}
+									fullWidth
+									InputLabelProps={{ shrink: true }}
+								/>
+								<Button
+									variant="contained"
+									color="primary"
+									style={{ marginTop: 15 }}
+									fullWidth
+									type="submit"
+								>
+									Generate Signature
+								</Button>
+								<Button
+									variant="contained"
+									color="secondary"
+									style={{ marginTop: 15 }}
+									fullWidth
+									onClick={resetFieldsHandler}
+								>
+									Reset
+								</Button>
+							</form>
+						</Box>
+					</Grid>
+
+					{/* Right side */}
+					<Grid
+						item
+						md={9}
+						style={{
+							backgroundColor: "rgb(240,240,240)",
+							padding: "20px",
+							position: "relative",
+						}}
 					>
-						<TextField
-							name="fullName"
-							label="Full Name"
-							placeholder="John Doe"
-							style={{ marginTop: 15 }}
-							InputLabelProps={{ shrink: true }}
-							fullWidth
-							required
-						/>
-						<TextField
-							name="jobTitle"
-							label="Job Title"
-							placeholder="Your Title"
-							style={{ marginTop: 15 }}
-							InputLabelProps={{ shrink: true }}
-							fullWidth
-							required
-						/>
-						<TextField
-							name="department"
-							label="Department"
-							placeholder="Your Department"
-							style={{ marginTop: 15 }}
-							InputLabelProps={{ shrink: true }}
-							fullWidth
-							required
-						/>
-						<TextField
-							name="email"
-							label="Email"
-							placeholder="john.doe@m-v-t.com"
-							style={{ marginTop: 15 }}
-							InputLabelProps={{ shrink: true }}
-							fullWidth
-							required
-						/>
-						<PhoneNumberInput
-							name="officeNumber"
-							label="Office Number"
-							placeholder="915.791.4000"
-							style={{ marginTop: 15 }}
-							InputLabelProps={{ shrink: true }}
-							fullWidth
-							required
-						/>
-						<TextField
-							name="ext"
-							label="Ext (optional)"
-							placeholder="1234"
-							fullWidth
-							style={{ marginTop: 15 }}
-							InputLabelProps={{ shrink: true }}
-						/>
-						<PhoneNumberInput
-							name="cellNumber"
-							label="Cell Number (optional)"
-							placeholder="123.456.7890"
-							style={{ marginTop: 15 }}
-							fullWidth
-							InputLabelProps={{ shrink: true }}
-						/>
+						{isAlertVisible && (
+							<Alert
+								severity="success"
+								variant="filled"
+								style={{
+									position: "absolute",
+									right: 20,
+									left: 20,
+								}}
+							>
+								Successully copied your new signature
+							</Alert>
+						)}
+
+						{/* First Bar */}
+						<div
+							style={{
+								display: "flex",
+								flexDirection: "row",
+								padding: "1rem",
+								backgroundColor: "#4a515d",
+								borderBottom:
+									"1px solid rgba(255, 255, 255, 0.1)",
+								borderRadius: "8px 8px 0px 0px",
+							}}
+						>
+							{[
+								"rgb(242, 84, 91)",
+								"rgb(245, 194, 107)",
+								"rgb(0, 189, 165)",
+							].map((bc, i) => (
+								<div
+									key={i}
+									style={{
+										height: "0.5rem",
+										width: "0.5rem",
+										borderRadius: "50%",
+										marginRight: "0.5rem",
+										backgroundColor: bc,
+									}}
+								/>
+							))}
+						</div>
+						{/* Second Bar */}
+						<div
+							style={{
+								display: "flex",
+								flexDirection: "column",
+								padding: "1rem 2rem",
+								fontWeight: "500",
+								color: "rgb(255, 255, 255)",
+								backgroundColor: "#4a515d",
+							}}
+						>
+							<Typography variant="subtitle2">
+								To: Your Recipient
+							</Typography>
+							<Typography variant="subtitle2">
+								Subject: Check out my new Email Signature
+							</Typography>
+						</div>
+						{/* Mail Content Area */}
+						<div
+							style={{
+								backgroundColor: "#fff",
+								height: "50%",
+								display: "flex",
+								flexDirection: "column",
+								padding: "30px 20px",
+								justifyContent: "space-between",
+								marginBottom: "10px",
+							}}
+						>
+							<GhostLines />
+							<Signature
+								signatureRef={signatureRef}
+								signatureDetails={{
+									fullName,
+									jobTitle,
+									department,
+									cellNumber,
+									officeNumber,
+									officeExt,
+									email,
+								}}
+							/>
+						</div>
 						<Button
+							onClick={handleClick}
 							variant="contained"
 							color="primary"
-							style={{ marginTop: 15 }}
 							fullWidth
-							type="submit"
 						>
-							Generate Signature
+							Copy Singature
 						</Button>
-						<Button
-							variant="contained"
-							color="secondary"
-							style={{ marginTop: 15 }}
-							fullWidth
-							onClick={resetFieldsHandler}
-						>
-							Reset
-						</Button>
-					</form>
-				</Box>
-			</Grid>
-
-			{/* Right side */}
-			<Grid
-				item
-				md={9}
-				style={{
-					backgroundColor: "rgb(240,240,240)",
-					padding: "20px",
-					position: "relative",
-				}}
-			>
-				{isAlertVisible && (
-					<Alert
-						severity="success"
-						variant="filled"
-						style={{
-							position: "absolute",
-							right: 20,
-							left: 20,
-						}}
-					>
-						Successully copied your new signature
-					</Alert>
-				)}
-
-				{/* First Bar */}
-				<div
-					style={{
-						display: "flex",
-						flexDirection: "row",
-						padding: "1rem",
-						backgroundColor: "#4a515d",
-						borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
-						borderRadius: "8px 8px 0px 0px",
-					}}
-				>
-					{[
-						"rgb(242, 84, 91)",
-						"rgb(245, 194, 107)",
-						"rgb(0, 189, 165)",
-					].map((bc, i) => (
-						<div
-							key={i}
-							style={{
-								height: "0.5rem",
-								width: "0.5rem",
-								borderRadius: "50%",
-								marginRight: "0.5rem",
-								backgroundColor: bc,
-							}}
-						/>
-					))}
-				</div>
-				{/* Second Bar */}
-				<div
-					style={{
-						display: "flex",
-						flexDirection: "column",
-						padding: "1rem 2rem",
-						fontWeight: "500",
-						color: "rgb(255, 255, 255)",
-						backgroundColor: "#4a515d",
-					}}
-				>
-					<Typography variant="subtitle2">
-						To: Your Recipient
-					</Typography>
-					<Typography variant="subtitle2">
-						Subject: Check out my new Email Signature
-					</Typography>
-				</div>
-				{/* Mail Content Area */}
-				<div
-					style={{
-						backgroundColor: "#fff",
-						height: "50%",
-						display: "flex",
-						flexDirection: "column",
-						padding: "30px 20px",
-						justifyContent: "space-between",
-						marginBottom: "10px",
-					}}
-				>
-					<GhostLines />
-					<Signature
-						signatureRef={signatureRef}
-						signatureDetails={{
-							fullName,
-							jobTitle,
-							department,
-							cellNumber,
-							officeNumber,
-							officeExt,
-							email,
-						}}
-					/>
-				</div>
-				<Button
-					onClick={handleClick}
-					variant="contained"
-					color="primary"
-					fullWidth
-				>
-					Copy Singature
-				</Button>
-			</Grid>
+					</Grid>
+				</>
+			)}
 		</Grid>
 	);
 }

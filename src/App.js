@@ -126,8 +126,9 @@ function App() {
 						display: "flex",
 						alignItems: "center",
 						justifyContent: "center",
+						backgroundColor: "#bf3a30",
 						backgroundImage:
-							"linear-gradient(to right bottom, #0060a8, #0060a8, #0060a8, #0060a8, #0060a8, #0067ae, #006fb4, #0076ba, #0086c6, #0096d2, #00a7dc, #00b7e5)",
+							"linear-gradient(315deg, #e15c20 0%, #bf3a30 74%)",
 					}}
 				>
 					<Typography

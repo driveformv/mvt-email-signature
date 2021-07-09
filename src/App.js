@@ -92,26 +92,6 @@ function App() {
 		});
 	};
 
-	const resetFieldsHandler = () => {
-		const {
-			fullName,
-			jobTitle,
-			department,
-			cellNumber,
-			officeNumber,
-			ext,
-			email,
-		} = formRef.current;
-
-		fullName.value = "";
-		jobTitle.value = "";
-		department.value = "";
-		cellNumber.value = "";
-		officeNumber.value = "";
-		ext.value = "";
-		email.value = "";
-	};
-
 	return (
 		<Grid
 			container
@@ -158,7 +138,6 @@ function App() {
 							</Typography>
 							<form
 								ref={formRef}
-								onReset={resetFieldsHandler}
 								onSubmit={generateSignatureHandler}
 							>
 								<TextField
@@ -270,7 +249,7 @@ function App() {
 									color="secondary"
 									style={{ marginTop: 15 }}
 									fullWidth
-									onClick={resetFieldsHandler}
+									onClick={() => window.location.reload()}
 								>
 									Reset
 								</Button>

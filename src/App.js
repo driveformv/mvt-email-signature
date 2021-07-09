@@ -5,6 +5,8 @@ import {
 	Box,
 	Typography,
 	TextField,
+	Select,
+	MenuItem,
 	Button,
 	useMediaQuery,
 } from "@material-ui/core";
@@ -139,9 +141,8 @@ function App() {
 							color: "#fff",
 						}}
 					>
-						Mesilla Valley Transportation email signature generator
-						not available on mobile. Please navigate to our desktop
-						version.
+						The MVT email signature generator is not available on
+						mobile devices. Please navigate to our desktop version.
 					</Typography>
 				</Grid>
 			) : (
@@ -196,7 +197,7 @@ function App() {
 									fullWidth
 									required
 								/>
-								<PhoneNumberInput
+								{/* <PhoneNumberInput
 									name="officeNumber"
 									label="Office Number"
 									placeholder="915.791.4000"
@@ -204,7 +205,41 @@ function App() {
 									InputLabelProps={{ shrink: true }}
 									fullWidth
 									required
-								/>
+								/> */}
+								<Select
+									name="officeNumber"
+									displayEmpty
+									inputProps={{
+										"aria-label": "Without label",
+									}}
+									defaultValue=""
+									fullWidth
+									style={{ marginTop: 15 }}
+									required
+								>
+									<MenuItem value="">
+										<em>Select office number</em>
+									</MenuItem>
+									<MenuItem value="575.524.2835">
+										575.524.2835 (Las Cruces Office)
+									</MenuItem>
+									<MenuItem value="915.791.4000">
+										915.791.4000 (El Paso Terminal)
+									</MenuItem>
+									<MenuItem value="915.791.8730">
+										915.791.8730 (El Paso Recruiting)
+									</MenuItem>
+									<MenuItem value="615.691.4367">
+										615.691.4367 (Nashville Terminal)
+									</MenuItem>
+									<MenuItem value="303.426.4174">
+										303.426.4174 (Denver Terminal)
+									</MenuItem>
+									<MenuItem value="956.717.9849">
+										956.717.9849 (Laredo Terminal)
+									</MenuItem>
+								</Select>
+
 								<TextField
 									name="ext"
 									label="Ext (optional)"

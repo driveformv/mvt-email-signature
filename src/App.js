@@ -360,7 +360,7 @@ function App() {
 							color="primary"
 							fullWidth
 						>
-							Copy Singature
+							Copy Signature
 						</Button>
 					</Grid>
 				</>

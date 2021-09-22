@@ -6,23 +6,11 @@ import Website from "./Website";
 import SocialMediaIcons from "./SocialMediaIcons";
 
 const Signature = ({ signatureRef, signatureDetails }) => {
-	const {
-		fullName,
-		jobTitle,
-		department,
-		cellNumber,
-		officeNumber,
-		officeExt,
-		email,
-	} = signatureDetails;
+	const { fullName, jobTitle, department, cellNumber, officeNumber, officeExt, email } = signatureDetails;
 
 	return (
 		<div ref={signatureRef}>
-			<table
-				cellPadding="0"
-				cellSpacing="0"
-				style={{ backgroundColor: "white", width: "525px" }}
-			>
+			<table cellPadding="0" cellSpacing="0" style={{ backgroundColor: "white", width: "525px" }}>
 				<tbody>
 					<tr>
 						<td
@@ -39,36 +27,16 @@ const Signature = ({ signatureRef, signatureDetails }) => {
 						<td style={{ paddingLeft: "20px" }}>
 							<table cellPadding="0" cellSpacing="0">
 								<tbody>
-									<Name
-										fullName={
-											fullName
-												? fullName
-												: "Your Full Name"
-										}
-									/>
+									<Name fullName={fullName || "Your Full Name"} />
 									<PositionAndDepartment
-										jobTitle={
-											jobTitle ? jobTitle : "Your Title"
-										}
-										department={
-											department
-												? department
-												: "Your Department"
-										}
+										jobTitle={jobTitle || "Your Title"}
+										department={department || "Your Department"}
 									/>
 									<ContactDetails
-										officeNumber={
-											officeNumber
-												? officeNumber
-												: "123.456.7890"
-										}
+										officeNumber={officeNumber || "123.456.7890"}
 										cellNumber={cellNumber}
 										officeExt={officeExt}
-										email={
-											email
-												? email
-												: "youremail@m-v-t.com"
-										}
+										email={email || "youremail@m-v-t.com"}
 									/>
 									<Website />
 									<SocialMediaIcons />

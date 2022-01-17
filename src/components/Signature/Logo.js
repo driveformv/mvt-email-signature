@@ -7,7 +7,7 @@ const Logo = () => {
 			<img
 				border="0"
 				// src="https://driveformvt.com/wp-content/uploads/2021/06/MVT-Globe-email.png"
-				src="https://m-v-t.com/wp-content/uploads/2021/12/mvt-logo-40-year-anniversary.png"
+				src="https://imagedelivery.net/VcyCX-G1STM0PJ3dh1L69A/5af68d4f-d7af-4f3a-60f1-09a00101ab00/public"
 				alt="Logo"
 				width={80}
 			/>

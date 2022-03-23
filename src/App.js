@@ -1,15 +1,6 @@
 import { useRef, useState, memo } from "react";
 import Alert from "@material-ui/lab/Alert";
-import {
-	Grid,
-	Box,
-	Typography,
-	TextField,
-	Select,
-	MenuItem,
-	Button,
-	useMediaQuery,
-} from "@material-ui/core";
+import { Grid, Box, Typography, TextField, Select, MenuItem, Button, useMediaQuery } from "@material-ui/core";
 
 import Signature from "./components/Signature/Signature";
 
@@ -49,15 +40,7 @@ function App() {
 
 	const generateSignatureHandler = (e) => {
 		e.preventDefault();
-		const {
-			fullName,
-			jobTitle,
-			department,
-			cellNumber,
-			officeNumber,
-			ext,
-			email,
-		} = formRef.current;
+		const { fullName, jobTitle, department, cellNumber, officeNumber, ext, email } = formRef.current;
 
 		setFullName(fullName.value);
 		setJobTitle(jobTitle.value);
@@ -109,8 +92,7 @@ function App() {
 						alignItems: "center",
 						justifyContent: "center",
 						backgroundColor: "#bf3a30",
-						backgroundImage:
-							"linear-gradient(315deg, #e15c20 0%, #bf3a30 74%)",
+						backgroundImage: "linear-gradient(315deg, #e15c20 0%, #bf3a30 74%)",
 					}}
 				>
 					<Typography
@@ -121,8 +103,8 @@ function App() {
 							color: "#fff",
 						}}
 					>
-						The MVT email signature generator is not available on
-						mobile devices. Please navigate to our desktop version.
+						The MVT email signature generator is not available on mobile devices. Please navigate to our
+						desktop version.
 					</Typography>
 				</Grid>
 			) : (
@@ -130,16 +112,10 @@ function App() {
 					{/* Left side */}
 					<Grid item md={3}>
 						<Box p={4}>
-							<Typography
-								variant="h5"
-								style={{ fontWeight: "500", color: "#4a515d" }}
-							>
+							<Typography variant="h5" style={{ fontWeight: "500", color: "#4a515d" }}>
 								Signature Details
 							</Typography>
-							<form
-								ref={formRef}
-								onSubmit={generateSignatureHandler}
-							>
+							<form ref={formRef} onSubmit={generateSignatureHandler}>
 								<TextField
 									name="fullName"
 									label="Full Name"
@@ -199,24 +175,13 @@ function App() {
 									<MenuItem value="">
 										<em>Select office number</em>
 									</MenuItem>
-									<MenuItem value="575.524.2835">
-										575.524.2835 (Las Cruces Office)
-									</MenuItem>
-									<MenuItem value="915.791.4000">
-										915.791.4000 (El Paso Terminal)
-									</MenuItem>
-									<MenuItem value="915.791.8730">
-										915.791.8730 (El Paso Recruiting)
-									</MenuItem>
-									<MenuItem value="615.691.4367">
-										615.691.4367 (Nashville Terminal)
-									</MenuItem>
-									<MenuItem value="303.426.4174">
-										303.426.4174 (Denver Terminal)
-									</MenuItem>
-									<MenuItem value="956.717.9849">
-										956.717.9849 (Laredo Terminal)
-									</MenuItem>
+									<MenuItem value="575.524.2835">575.524.2835 (Las Cruces Office)</MenuItem>
+									<MenuItem value="915.791.4000">915.791.4000 (El Paso Terminal)</MenuItem>
+									<MenuItem value="915.791.8730">915.791.8730 (El Paso Recruiting)</MenuItem>
+									<MenuItem value="615.691.4367">615.691.4367 (Nashville Terminal)</MenuItem>
+									<MenuItem value="303.426.4174">303.426.4174 (Denver Terminal)</MenuItem>
+									<MenuItem value="956.717.9849">956.717.9849 (Laredo Terminal)</MenuItem>
+									<MenuItem value="520.761.3264">520.761.3264 (Nogales)</MenuItem>
 								</Select>
 
 								<TextField
@@ -288,16 +253,11 @@ function App() {
 								flexDirection: "row",
 								padding: "1rem",
 								backgroundColor: "#4a515d",
-								borderBottom:
-									"1px solid rgba(255, 255, 255, 0.1)",
+								borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
 								borderRadius: "8px 8px 0px 0px",
 							}}
 						>
-							{[
-								"rgb(242, 84, 91)",
-								"rgb(245, 194, 107)",
-								"rgb(0, 189, 165)",
-							].map((bc, i) => (
+							{["rgb(242, 84, 91)", "rgb(245, 194, 107)", "rgb(0, 189, 165)"].map((bc, i) => (
 								<div
 									key={i}
 									style={{
@@ -321,12 +281,8 @@ function App() {
 								backgroundColor: "#4a515d",
 							}}
 						>
-							<Typography variant="subtitle2">
-								To: Your Recipient
-							</Typography>
-							<Typography variant="subtitle2">
-								Subject: Check out my new Email Signature
-							</Typography>
+							<Typography variant="subtitle2">To: Your Recipient</Typography>
+							<Typography variant="subtitle2">Subject: Check out my new Email Signature</Typography>
 						</div>
 						{/* Mail Content Area */}
 						<div
@@ -354,12 +310,7 @@ function App() {
 								}}
 							/>
 						</div>
-						<Button
-							onClick={handleClick}
-							variant="contained"
-							color="primary"
-							fullWidth
-						>
+						<Button onClick={handleClick} variant="contained" color="primary" fullWidth>
 							Copy Signature
 						</Button>
 					</Grid>

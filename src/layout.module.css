@@ -1,0 +1,23 @@
+.layout {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+.sidePanel {
+  width: 400px;
+  padding: 2rem;
+}
+
+.sidePanel_title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--color-primary-950);
+  margin-bottom: 1.5rem;
+}
+
+.mainPanel {
+  padding: 2rem;
+  flex: 1;
+  background-color: #eeeeef;
+}

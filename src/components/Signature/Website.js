@@ -1,24 +1,25 @@
-import React from "react";
+import { useCompanies } from 'contexts/companies';
 
 const Quote = () => {
-	return (
-		<tr>
-			<td
-                style={{
-                    fontFamily: "Arial, sans-serif",
-                    fontSize: "10pt",
-                    lineHeight: "10pt",
-                    paddingBottom: '2.5pt'
-                }}
-            >
-				<em>
-					<strong>
-						www.m-v-t.com
-					</strong>
-				</em>
-			</td>
-		</tr>
-	);
+  const { companies, selectedCompanyKey } = useCompanies();
+  const company = companies[selectedCompanyKey];
+
+  return (
+    <tr>
+      <td
+        style={{
+          fontFamily: 'Arial, sans-serif',
+          fontSize: '10pt',
+          lineHeight: '10pt',
+          paddingBottom: '2.5pt',
+        }}
+      >
+        <em>
+          <strong style={{ fontFamily: 'Arial, sans-serif', fontSize: '10pt' }}>{company.websiteURL}</strong>
+        </em>
+      </td>
+    </tr>
+  );
 };
 
 export default Quote;

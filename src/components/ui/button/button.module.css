@@ -1,0 +1,101 @@
+/* General styles */
+.button {
+  align-items: center;
+  border-radius: 6px;
+  border-width: 1px;
+  border-style: solid;
+  cursor: pointer;
+  display: flex;
+  font-size: 0.875rem;
+  justify-content: center;
+  padding: 9px 12px;
+  position: relative;
+}
+
+.label {
+  display: flex;
+  align-items: center;
+}
+
+:not(.button--loading):disabled {
+  /* Disabled button that is not loading */
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.button--loading {
+  cursor: wait;
+  opacity: 0.5;
+}
+
+.button--loading .label {
+  visibility: hidden;
+}
+
+/* Default styles */
+.default {
+  border-color: #d4d4d8;
+  background-color: #fff;
+  color: #3f3f46;
+}
+
+.default:not(:disabled):hover {
+  background-color: #f0f9ff;
+  border-color: #7dd3fc;
+  color: #0369a1;
+}
+
+/* Primary styles */
+.primary {
+  border-color: var(--color-primary-600);
+  background-color: var(--color-primary-600);
+  color: white;
+}
+
+.primary:not(:disabled):hover {
+  /* Hover when button is not disabled */
+  background-color: var(--color-primary-500);
+  border-color: var(--color-primary-500);
+}
+
+/* Secondary styles */
+.secondary {
+  background-color: #371d2b;
+  color: white;
+}
+
+.secondary:hover {
+  background-color: #442434;
+  cursor: pointer;
+}
+
+/* Spinner styles */
+.spinner {
+  left: calc(50% - 0.5em);
+  position: absolute;
+  top: calc(50% - 0.45em);
+}
+
+.spinner svg {
+  animation: spin 1s linear infinite;
+  color: var(--color-gray-50);
+  height: 14px;
+  width: 14px;
+}
+
+.spinner circle {
+  opacity: 0.25;
+}
+
+.spinner path {
+  opacity: 0.75;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

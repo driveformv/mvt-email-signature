@@ -1,82 +1,55 @@
-import React from "react";
+import { useCompanies } from 'contexts/companies';
 
 const SocialMediaIcons = () => {
-	return (
-		<tr>
-			<td>
-				<span>
-					<a
-						href="https://www.facebook.com/mesillavalleytransport/"
-						target="_blank"
-						rel="noreferrer"
-					>
-						<img
-							width="23"
-							alt="facebook icon"
-							src="https://i.ibb.co/dbYP654/FB-email-red-01.png"
-						/>
-					</a>
-					&nbsp;
-				</span>
-				<span>
-					<a
-						href="https://twitter.com/MVTServices"
-						target="_blank"
-						rel="noreferrer"
-					>
-						<img
-							width="23"
-							alt="twitter icon"
-							src="https://i.ibb.co/ZKWhkby/Twitter-email-red-01.png"
-						/>
-					</a>
-					&nbsp;
-				</span>
-				<span>
-					<a
-						href="https://www.youtube.com/channel/UCANz_NAedSbFwiBrkZ8c5nA"
-						target="_blank"
-						rel="noreferrer"
-					>
-						<img
-							width="23"
-							alt="youtube icon"
-							src="https://i.ibb.co/MsFBYJ7/YT-email-red-01.png"
-						/>
-					</a>
-					&nbsp;
-				</span>
-				<span>
-					<a
-						href="https://www.linkedin.com/company/m-v-t/"
-						target="_blank"
-						rel="noreferrer"
-					>
-						<img
-							width="23"
-							alt="linkedin icon"
-							src="https://i.ibb.co/hYKScqb/linkedin-email-red-01.png"
-						/>
-					</a>
-					&nbsp;
-				</span>
-				<span>
-					<a
-						href="https://www.instagram.com/mesillavalleytransportation/"
-						target="_blank"
-						rel="noreferrer"
-					>
-						<img
-							width="23"
-							alt="instagram icon"
-							src="https://i.ibb.co/GtX9K3Z/IG-email-red-01.png"
-						/>
-					</a>
-					&nbsp;
-				</span>
-			</td>
-		</tr>
-	);
+  const { companies, selectedCompanyKey } = useCompanies();
+  const company = companies[selectedCompanyKey];
+
+  return (
+    <tr>
+      <td>
+        {Object.hasOwn(company.socialMedia, 'facebook') && (
+          <span>
+            <a href={company.socialMedia.facebook.source} target="_blank" rel="noreferrer">
+              <img width="23" alt="facebook icon" src={company.socialMedia.facebook.icon} />
+            </a>
+            &nbsp;
+          </span>
+        )}
+        {Object.hasOwn(company.socialMedia, 'twitter') && (
+          <span>
+            <a href={company.socialMedia.twitter.source} target="_blank" rel="noreferrer">
+              <img width="23" alt="twitter icon" src={company.socialMedia.twitter.icon} />
+            </a>
+            &nbsp;
+          </span>
+        )}
+        {Object.hasOwn(company.socialMedia, 'youtube') && (
+          <span>
+            <a href={company.socialMedia.youtube.source} target="_blank" rel="noreferrer">
+              <img width="23" alt="youtube icon" src={company.socialMedia.youtube.icon} />
+            </a>
+            &nbsp;
+          </span>
+        )}
+        {Object.hasOwn(company.socialMedia, 'linkedin') && (
+          <span>
+            <a href={company.socialMedia.linkedin.source} target="_blank" rel="noreferrer">
+              <img width="23" alt="linkedin icon" src={company.socialMedia.linkedin.icon} />
+            </a>
+            &nbsp;
+          </span>
+        )}
+        {Object.hasOwn(company.socialMedia, 'instagram') && (
+          <span>
+            <a href={company.socialMedia.instagram.source} target="_blank" rel="noreferrer">
+              <img width="23" alt="instagram icon" src={company.socialMedia.instagram.icon} />
+            </a>
+            &nbsp;
+          </span>
+        )}
+      </td>
+    </tr>
+  );
 };
 
 export default SocialMediaIcons;

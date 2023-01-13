@@ -1,24 +1,26 @@
-import React from "react";
+import { useCompanies } from 'contexts/companies';
 
 const PositionAndDepartment = ({ jobTitle, department }) => {
-	return (
-		<tr>
-			<td style={styles.td}>
-				{jobTitle} | {department}
-			</td>
-		</tr>
-	);
-};
+  const { companies, selectedCompanyKey } = useCompanies();
 
-const styles = {
-	td: {
-		fontFamily: "Arial, sanserif",
-		fontWeight: "bold",
-		fontSize: "10pt",
-		lineHeight: "10pt",
-		color: "#c02125",
-		paddingBottom: "2.5pt",
-	},
+  const styles = {
+    td: {
+      fontFamily: 'Arial, sanserif',
+      fontWeight: 'bold',
+      fontSize: '10pt',
+      lineHeight: '10pt',
+      color: companies[selectedCompanyKey].brandColor,
+      paddingBottom: '2.5pt',
+    },
+  };
+
+  return (
+    <tr>
+      <td style={styles.td}>
+        {jobTitle} | {department}
+      </td>
+    </tr>
+  );
 };
 
 export default PositionAndDepartment;

@@ -1,46 +1,39 @@
-import { useState } from "react";
-import { TextField } from "@material-ui/core";
+import TextInput from 'components/form/input/input';
+const PhoneInput = ({ onChange, value, ...rest }) => {
+  const handleInput = (e) => {
+    // this is where we'll call our future formatPhoneNumber function that we haven't written yet.
+    const formattedPhoneNumber = formatPhoneNumber(e.target.value);
+    // we'll set the input value using our setInputValue
+    onChange(formattedPhoneNumber);
+  };
 
-const PhoneInput = ({ ...rest }) => {
-	const [number, setNumber] = useState("");
+  function formatPhoneNumber(value) {
+    // if input value is falsy eg if the user deletes the input, then just return
+    if (!value) return value;
 
-	const handleInput = (e) => {
-		// this is where we'll call our future formatPhoneNumber function that we haven't written yet.
-		const formattedPhoneNumber = formatPhoneNumber(e.target.value);
-		// we'll set the input value using our setInputValue
-		setNumber(formattedPhoneNumber);
-	};
+    // clean the input for any non-digit values.
+    const phoneNumber = value.replace(/[^\d]/g, '');
 
-	function formatPhoneNumber(value) {
-		// if input value is falsy eg if the user deletes the input, then just return
-		if (!value) return value;
+    // phoneNumberLength is used to know when to apply our formatting for the phone number
+    const phoneNumberLength = phoneNumber.length;
 
-		// clean the input for any non-digit values.
-		const phoneNumber = value.replace(/[^\d]/g, "");
+    // we need to return the value with no formatting if its less then four digits
+    // this is to avoid weird behavior that occurs if you  format the area code to early
 
-		// phoneNumberLength is used to know when to apply our formatting for the phone number
-		const phoneNumberLength = phoneNumber.length;
+    if (phoneNumberLength < 4) return phoneNumber;
 
-		// we need to return the value with no formatting if its less then four digits
-		// this is to avoid weird behavior that occurs if you  format the area code to early
+    // if phoneNumberLength is greater than 4 and less the 7 we start to return
+    // the formatted number
+    if (phoneNumberLength < 7) {
+      return `${phoneNumber.slice(0, 3)}.${phoneNumber.slice(3)}`;
+    }
 
-		if (phoneNumberLength < 4) return phoneNumber;
+    // finally, if the phoneNumberLength is greater then seven, we add the last
+    // bit of formatting and return it.
+    return `${phoneNumber.slice(0, 3)}.${phoneNumber.slice(3, 6)}.${phoneNumber.slice(6, 10)}`;
+  }
 
-		// if phoneNumberLength is greater than 4 and less the 7 we start to return
-		// the formatted number
-		if (phoneNumberLength < 7) {
-			return `${phoneNumber.slice(0, 3)}.${phoneNumber.slice(3)}`;
-		}
-
-		// finally, if the phoneNumberLength is greater then seven, we add the last
-		// bit of formatting and return it.
-		return `${phoneNumber.slice(0, 3)}.${phoneNumber.slice(
-			3,
-			6
-		)}.${phoneNumber.slice(6, 10)}`;
-	}
-
-	return <TextField value={number} onChange={handleInput} {...rest} />;
+  return <TextInput value={value} onChange={handleInput} {...rest} />;
 };
 
 export default PhoneInput;

@@ -103,6 +103,7 @@ const BorderTireCreateSignaturePage = () => {
             label="Office number"
             placeholder="Select office number"
             options={[
+              { value: '956.217.5272', name: '956.217.5272 (Laredo, TX)' },
               { value: '661.391.5900', name: '661.391.5900 (Bakersfield, CA)' },
               { value: '951.371.1704', name: '951.371.1704 (Corona, CA)' },
               { value: '909.429.6876', name: '909.429.6876 (Fontana, CA)' },

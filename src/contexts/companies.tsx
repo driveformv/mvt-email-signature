@@ -3,7 +3,7 @@ import { useContext, createContext, useState, useMemo, useCallback, ReactElement
 const companies = {
   MESILLA_VALLEY_TRANSPORTATION: {
     name: 'Mesilla Valley Transportation',
-    logoURL: 'https://driveformvt.com/wp-content/uploads/2021/06/MVT-Globe-email.png',
+    logoURL: 'https://m-v-t.com/wp-content/uploads/2023/08/logo.png',
     websiteURL: 'www.m-v-t.com',
     brandColor: '#c02125',
     socialMedia: {

@@ -33,7 +33,7 @@ const INITIAL_SIGNATURE_INFORMATION = {
 const Signature = ({ signatureRef, signatureDetails = INITIAL_SIGNATURE_INFORMATION }: SignatureProps) => {
   const { fullName, jobTitle, department, cellNumber, officeNumber, officeExt, email } = signatureDetails;
 
-  const { companies, selectedCompanyKey } = useCompanies();
+  const company = useCompanies();
 
   return (
     <div ref={signatureRef} className="signatureContainer">
@@ -44,9 +44,7 @@ const Signature = ({ signatureRef, signatureDetails = INITIAL_SIGNATURE_INFORMAT
               width="80"
               rowSpan={6}
               style={{
-                borderRight: `3px solid ${
-                  companies[selectedCompanyKey as 'MESILLA_VALLEY_TRANSPORTATION' | 'BORDER_TIRE'].brandColor
-                }`,
+                borderRight: `3px solid ${company?.brandColor}`,
                 padding: '0 20px',
                 width: '80',
               }}

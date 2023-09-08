@@ -1,7 +1,7 @@
 import { useCompanies } from 'contexts/companies';
 
 const ContactDetails = ({ cellNumber, officeNumber, officeExt, email }) => {
-  const { companies, selectedCompanyKey } = useCompanies();
+  const company = useCompanies();
 
   return (
     <>
@@ -15,14 +15,12 @@ const ContactDetails = ({ cellNumber, officeNumber, officeExt, email }) => {
           }}
         >
           <span>
-            <strong style={{ color: companies[selectedCompanyKey].brandColor, fontFamily: 'Arial, sans-serif' }}>
-              Office:{' '}
-            </strong>
+            <strong style={{ color: company.brandColor, fontFamily: 'Arial, sans-serif' }}>Office: </strong>
             {officeNumber}{' '}
           </span>
           {officeExt ? (
             <span>
-              <span style={{ color: companies[selectedCompanyKey].brandColor }}>
+              <span style={{ color: company.brandColor }}>
                 <strong>Ext: </strong>
               </span>
               {officeExt}
@@ -41,9 +39,7 @@ const ContactDetails = ({ cellNumber, officeNumber, officeExt, email }) => {
             }}
           >
             <span>
-              <strong style={{ color: companies[selectedCompanyKey].brandColor, fontFamily: 'Arial, sans-serif' }}>
-                Cell Number:{' '}
-              </strong>
+              <strong style={{ color: company.brandColor, fontFamily: 'Arial, sans-serif' }}>Cell Number: </strong>
               {cellNumber}
             </span>
           </td>
@@ -59,9 +55,7 @@ const ContactDetails = ({ cellNumber, officeNumber, officeExt, email }) => {
           }}
         >
           <span>
-            <strong style={{ color: companies[selectedCompanyKey].brandColor, fontFamily: 'Arial, sans-serif' }}>
-              Email:{' '}
-            </strong>
+            <strong style={{ color: company.brandColor, fontFamily: 'Arial, sans-serif' }}>Email: </strong>
             {email}
           </span>
         </td>

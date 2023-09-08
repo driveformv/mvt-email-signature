@@ -11,7 +11,7 @@ import { BiArrowBack } from 'react-icons/bi';
 import { useNavigate } from 'react-router-dom';
 import { EmailSignatureCopier } from 'util/email-signature-copier';
 
-const CreateSignaturePage = () => {
+const BorderInternationalCreateSignaturePage = () => {
   const navigate = useNavigate();
   const [isAlertVisible, setIsAlertVisible] = useState(false);
   const signatureRef = useRef<HTMLDivElement | null>(null);
@@ -58,7 +58,7 @@ const CreateSignaturePage = () => {
   };
 
   return (
-    <CompaniesProvider company="MESILLA_VALLEY_TRANSPORTATION">
+    <CompaniesProvider company="BORDER_INTERNATIONAL">
       <div className={styles.layout}>
         <div className={styles.sidePanel}>
           <Button style={{ marginBottom: '1rem' }} onClick={() => navigate('/')}>
@@ -98,15 +98,7 @@ const CreateSignaturePage = () => {
             name="officeNumber"
             label="Office number"
             placeholder="Select office number"
-            options={[
-              { value: '575.524.2835', name: '575.524.2835 (Las Cruces Office)' },
-              { value: '915.791.4000', name: '915.791.4000 (El Paso Terminal)' },
-              { value: '915.791.8730', name: '915.791.8730 (El Paso Recruiting)' },
-              { value: '615.691.4367', name: '615.691.4367 (Nashville Terminal)' },
-              { value: '303.426.4174', name: '303.426.4174 (Denver Terminal)' },
-              { value: '956.717.9849', name: '956.717.9849 (Laredo Terminal)' },
-              { value: '520.761.3264', name: '520.761.3264 (Nogales)' },
-            ]}
+            options={[{ value: '844.972.1003', name: '844.972.1003' }]}
             value={formData.officeNumber}
             onChange={handleInputChange}
           />
@@ -157,4 +149,4 @@ const CreateSignaturePage = () => {
   );
 };
 
-export default CreateSignaturePage;
+export default BorderInternationalCreateSignaturePage;

@@ -1,8 +1,7 @@
 import { useCompanies } from 'contexts/companies';
 
 const SocialMediaIcons = () => {
-  const { companies, selectedCompanyKey } = useCompanies();
-  const company = companies[selectedCompanyKey];
+  const company = useCompanies();
 
   return (
     <tr>

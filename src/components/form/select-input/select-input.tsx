@@ -15,7 +15,13 @@ const SelectInput = ({ label, name, value, placeholder, options, onChange }: Sel
     <div className={styles.inputContainer}>
       {label && <label htmlFor={name}>{label}</label>}
       <div className={styles.selectContainer}>
-        <select style={{ color: value.length ? 'unset' : '#777777' }} id={name} value={value} onChange={onChange}>
+        <select
+          style={{ color: value.length ? 'unset' : '#777777' }}
+          id={name}
+          value={value}
+          onChange={onChange}
+          name={name}
+        >
           {placeholder && <option value="">{placeholder}</option>}
           {options.map((option) => (
             <option key={option.value} value={option.value}>

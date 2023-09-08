@@ -1,26 +1,27 @@
-import styles from 'layout.module.css';
-import EmailTemplate from 'components/email-template/email-template';
+import PhoneNumberInput from 'components/PhoneNumberInput';
 import Signature from 'components/Signature/Signature';
-import { useRef, useState } from 'react';
+import EmailTemplate from 'components/email-template/email-template';
 import TextInput from 'components/form/input/input';
 import SelectInput from 'components/form/select-input/select-input';
 import Button from 'components/ui/button/button';
-import { useCompanies } from 'contexts/companies';
-import { useEffect } from 'react';
-import PhoneNumberInput from 'components/PhoneNumberInput';
-import { useNavigate } from 'react-router-dom';
+import CompaniesProvider from 'contexts/companies';
+import styles from 'layout.module.css';
+import { ChangeEvent, useRef, useState } from 'react';
 import { BiArrowBack } from 'react-icons/bi';
+import { useNavigate } from 'react-router-dom';
+import { EmailSignatureCopier } from 'util/email-signature-copier';
 
 const BorderTireCreateSignaturePage = () => {
-  const [fullName, setFullName] = useState('');
-  const [jobTitle, setJobTitle] = useState('');
-  const [department, setDepartment] = useState('');
-  const [cellNumber, setCellNumber] = useState('');
-  const [officeNumber, setOfficeNumber] = useState('');
-  const [officeExt, setOfficeExt] = useState('');
-  const [email, setEmail] = useState('');
+  const [formData, setFormData] = useState({
+    fullName: '',
+    jobTitle: '',
+    department: '',
+    cellNumber: '',
+    officeNumber: '',
+    officeExt: '',
+    email: '',
+  });
   const [isAlertVisible, setIsAlertVisible] = useState(false);
-  const { setSelectedCompanyKey } = useCompanies();
   const navigate = useNavigate();
 
   const signatureRef = useRef<HTMLDivElement | null>(null);
@@ -29,17 +30,9 @@ const BorderTireCreateSignaturePage = () => {
     setIsAlertVisible(true);
 
     if (signatureRef.current) {
-      signatureRef.current.contentEditable = 'true';
-      signatureRef.current.focus();
-      document.execCommand('selectAll');
-      document.execCommand('copy');
-      signatureRef.current.contentEditable = 'false';
+      const emailSignatureCopier = new EmailSignatureCopier(signatureRef.current);
 
-      const selection = getSelection();
-
-      if (selection) {
-        selection.empty();
-      }
+      emailSignatureCopier.copy();
 
       setTimeout(() => {
         setIsAlertVisible(false);
@@ -48,21 +41,25 @@ const BorderTireCreateSignaturePage = () => {
   };
 
   const handleResetClick = () => {
-    setFullName('');
-    setJobTitle('');
-    setDepartment('');
-    setCellNumber('');
-    setOfficeNumber('');
-    setOfficeExt('');
-    setEmail('');
+    setFormData({
+      fullName: '',
+      jobTitle: '',
+      department: '',
+      cellNumber: '',
+      officeNumber: '',
+      officeExt: '',
+      email: '',
+    });
   };
 
-  useEffect(() => {
-    setSelectedCompanyKey('BORDER_TIRE');
-  }, [setSelectedCompanyKey]);
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.currentTarget;
+
+    setFormData((prevState) => ({ ...prevState, [name]: value }));
+  };
 
   return (
-    <>
+    <CompaniesProvider company="BORDER_TIRE">
       <div className={styles.layout}>
         <div className={styles.sidePanel}>
           <Button style={{ marginBottom: '1rem' }} onClick={() => navigate('/')}>
@@ -74,29 +71,29 @@ const BorderTireCreateSignaturePage = () => {
             label="Full name"
             placeholder="John Doe"
             name="fullName"
-            value={fullName}
-            onChange={(e) => setFullName(e.target.value)}
+            value={formData.fullName}
+            onChange={handleInputChange}
           />
           <TextInput
             label="Job title"
             placeholder="Customer Service Representative"
             name="jobTitle"
-            value={jobTitle}
-            onChange={(e) => setJobTitle(e.target.value)}
+            value={formData.jobTitle}
+            onChange={handleInputChange}
           />
           <TextInput
             label="Department"
             placeholder="Customer Service"
             name="department"
-            value={department}
-            onChange={(e) => setDepartment(e.target.value)}
+            value={formData.department}
+            onChange={handleInputChange}
           />
           <TextInput
             label="Email"
             placeholder="john.doe@domain.com"
             name="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={formData.email}
+            onChange={handleInputChange}
           />
           <SelectInput
             name="officeNumber"
@@ -114,22 +111,27 @@ const BorderTireCreateSignaturePage = () => {
               { value: '575.288.3349', name: '575.288.3349 (Las Cruces, NM)' },
               { value: '915.872.2283', name: '915.872.2283 (El Paso, TX)' },
             ]}
-            value={officeNumber}
-            onChange={(e) => setOfficeNumber(e.target.value)}
+            value={formData.officeNumber}
+            onChange={handleInputChange}
           />
           <TextInput
             label="Ext (optional)"
             placeholder="1234"
-            name="ext"
-            value={officeExt}
-            onChange={(e) => setOfficeExt(e.target.value)}
+            name="officeExt"
+            value={formData.officeExt}
+            onChange={handleInputChange}
           />
           <PhoneNumberInput
             label="Cell Number (optional)"
             placeholder="123.456.7890"
             name="cellNumber"
-            value={cellNumber}
-            onChange={(formattedNumber: string) => setCellNumber(formattedNumber)}
+            value={formData.cellNumber}
+            onChange={(formattedNumber: string) => {
+              setFormData((prevFormData) => ({
+                ...prevFormData,
+                cellNumber: formattedNumber,
+              }));
+            }}
           />
           <Button onClick={handleResetClick} style={{ width: '100%', marginBottom: '1rem' }}>
             Reset
@@ -139,25 +141,23 @@ const BorderTireCreateSignaturePage = () => {
             style={{ width: '100%' }}
             onClick={handleClick}
             disabled={
-              !(fullName.length && jobTitle.length && department.length && email.length && officeNumber.length) ||
-              isAlertVisible
+              !(
+                formData.fullName.length &&
+                formData.jobTitle.length &&
+                formData.department.length &&
+                formData.email.length &&
+                formData.officeNumber.length
+              ) || isAlertVisible
             }
           >
             {isAlertVisible ? 'Signature Copied' : 'Copy Signature'}
           </Button>
         </div>
         <div className={styles.mainPanel}>
-          <EmailTemplate
-            signature={
-              <Signature
-                signatureRef={signatureRef}
-                signatureDetails={{ fullName, jobTitle, department, email, officeNumber, officeExt, cellNumber }}
-              />
-            }
-          />
+          <EmailTemplate signature={<Signature signatureRef={signatureRef} signatureDetails={formData} />} />
         </div>
       </div>
-    </>
+    </CompaniesProvider>
   );
 };
 

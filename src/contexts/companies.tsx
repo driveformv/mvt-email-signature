@@ -1,7 +1,27 @@
-import { useContext, createContext, useState, useMemo, useCallback, ReactElement } from 'react';
+import { ReactElement, createContext, useContext } from 'react';
 
-const companies = {
+interface Company {
+  id: string;
+  name: string;
+  logoURL: string;
+  websiteURL: string;
+  brandColor: string;
+  socialMedia: Partial<
+    Record<
+      'facebook' | 'youtube' | 'twitter' | 'linkedin' | 'instagram' | 'tiktok',
+      {
+        source: string;
+        icon: string;
+      }
+    >
+  >;
+}
+
+type CompanyKey = 'MESILLA_VALLEY_TRANSPORTATION' | 'BORDER_TIRE' | 'BORDER_INTERNATIONAL' | 'STAGECOACH';
+
+const companies: Record<CompanyKey, Company> = {
   MESILLA_VALLEY_TRANSPORTATION: {
+    id: 'MESILLA_VALLEY_TRANSPORTATION',
     name: 'Mesilla Valley Transportation',
     logoURL: 'https://saprodmrktngemailsigw2.blob.core.windows.net/assets/mvt/logo.png',
     websiteURL: 'www.m-v-t.com',
@@ -30,6 +50,7 @@ const companies = {
     },
   },
   BORDER_TIRE: {
+    id: 'BORDER_TIRE',
     name: 'Border Tire',
     logoURL: 'https://saprodmrktngemailsigw2.blob.core.windows.net/assets/border-tire/logo.png',
     websiteURL: 'www.border-tire.com',
@@ -53,34 +74,65 @@ const companies = {
       },
     },
   },
+  BORDER_INTERNATIONAL: {
+    id: 'BORDER_INTERNATIONAL',
+    name: 'Border International',
+    logoURL: 'https://saprodmrktngemailsigw2.blob.core.windows.net/assets/border-international/logo.png',
+    websiteURL: 'www.borderint.com',
+    brandColor: '#D14905',
+    socialMedia: {
+      facebook: {
+        icon: 'https://saprodmrktngemailsigw2.blob.core.windows.net/assets/border-international/facebook-icon.png',
+        source: 'https://www.facebook.com/BorderIntTrucks',
+      },
+      instagram: {
+        icon: 'https://saprodmrktngemailsigw2.blob.core.windows.net/assets/border-international/instagram-icon.png',
+        source: 'https://instagram.com/borderinternationaltrucks',
+      },
+      linkedin: {
+        icon: 'https://saprodmrktngemailsigw2.blob.core.windows.net/assets/border-international/linkedin-icon.png',
+        source: 'https://www.linkedin.com/company/borderinternationaltrucks',
+      },
+    },
+  },
+  STAGECOACH: {
+    id: 'STAGECOACH',
+    name: 'Stagecoach',
+    logoURL: 'https://saprodmrktngemailsigw2.blob.core.windows.net/assets/stagecoach/logo.png',
+    websiteURL: 'www.stagecoachcartage.com',
+    brandColor: '#926c41',
+    socialMedia: {
+      facebook: {
+        icon: '',
+        source: 'https://www.facebook.com/stagecoachcartage',
+      },
+      instagram: {
+        icon: '',
+        source: 'https://www.instagram.com/stagecoachcartage',
+      },
+      linkedin: {
+        icon: '',
+        source: 'https://www.linkedin.com/company/stagecoach-cartage-and-distribution',
+      },
+      tiktok: {
+        icon: '',
+        source: 'https://www.tiktok.com/@stagecoachcartage',
+      },
+      twitter: {
+        icon: '',
+        source: 'https://twitter.com/_Stagecoach',
+      },
+      youtube: {
+        icon: '',
+        source: 'https://www.youtube.com/channel/UCaDINRfulcxsqAviBdcAhqA',
+      },
+    },
+  },
 };
 
-interface Company {
-  name: string;
-  logoURL: string;
-  websiteURL: string;
-  brandColor: string;
-  socialMedia: {
-    [key in 'facebook' | 'youtube' | 'twitter' | 'linkedin' | 'instagram']?: {
-      source: string;
-      icon: string;
-    };
-  };
-}
+const CompanyInformationContext = createContext<Company | null>(null);
 
-type UseCompaniesResult = ReturnType<typeof useCompanies>;
-
-const CompanyInformationContext = createContext<UseCompaniesResult>({
-  companies: companies,
-  selectedCompanyKey: 'MESILLA_VALLEY_TRANSPORTATION',
-  setSelectedCompanyKey: () => {},
-});
-
-const useCompanies = (): {
-  companies: Record<'MESILLA_VALLEY_TRANSPORTATION' | 'BORDER_TIRE', Company>;
-  selectedCompanyKey: 'MESILLA_VALLEY_TRANSPORTATION' | 'BORDER_TIRE';
-  setSelectedCompanyKey: (companyKey: 'MESILLA_VALLEY_TRANSPORTATION' | 'BORDER_TIRE') => void;
-} => {
+const useCompanies = (): Company | null => {
   const context = useContext(CompanyInformationContext);
 
   if (context === undefined) throw Error('useCompanies must be used inside company information provider');
@@ -88,26 +140,14 @@ const useCompanies = (): {
   return context;
 };
 
-const CompanyInformationProvider = ({ children }: { children: ReactElement }) => {
-  const { companies } = useCompanies();
-  const [selectedCompanyKey, setSelectedCompanyKey] = useState<'MESILLA_VALLEY_TRANSPORTATION' | 'BORDER_TIRE'>(
-    'MESILLA_VALLEY_TRANSPORTATION'
-  );
-
-  const handleSelectCompany = useCallback((companyKey: 'MESILLA_VALLEY_TRANSPORTATION' | 'BORDER_TIRE') => {
-    setSelectedCompanyKey(companyKey);
-  }, []);
-
-  const values = useMemo(
-    () => ({
-      companies,
-      selectedCompanyKey,
-      setSelectedCompanyKey: handleSelectCompany,
-    }),
-    [companies, selectedCompanyKey, handleSelectCompany]
-  );
-
-  return <CompanyInformationContext.Provider value={values}>{children}</CompanyInformationContext.Provider>;
+const CompanyInformationProvider = ({
+  children,
+  company,
+}: {
+  children: ReactElement;
+  company: 'MESILLA_VALLEY_TRANSPORTATION' | 'BORDER_TIRE' | 'BORDER_INTERNATIONAL' | 'STAGECOACH';
+}) => {
+  return <CompanyInformationContext.Provider value={companies[company]}>{children}</CompanyInformationContext.Provider>;
 };
 
 export default CompanyInformationProvider;

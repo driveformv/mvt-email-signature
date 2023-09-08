@@ -1,7 +1,7 @@
 import { useCompanies } from 'contexts/companies';
 
 const PositionAndDepartment = ({ jobTitle, department }) => {
-  const { companies, selectedCompanyKey } = useCompanies();
+  const company = useCompanies();
 
   const styles = {
     td: {
@@ -9,7 +9,7 @@ const PositionAndDepartment = ({ jobTitle, department }) => {
       fontWeight: 'bold',
       fontSize: '10pt',
       lineHeight: '10pt',
-      color: companies[selectedCompanyKey].brandColor,
+      color: company.brandColor,
       paddingBottom: '2.5pt',
     },
   };

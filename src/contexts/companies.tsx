@@ -24,7 +24,7 @@ const companies: Record<CompanyKey, Company> = {
     id: "MESILLA_VALLEY_TRANSPORTATION",
     name: "Mesilla Valley Transportation",
     logoURL: "https://saprodmrktngemailsigw2.blob.core.windows.net/assets/mvt/logo.png",
-    websiteURL: "www.m-v-t.com",
+    websiteURL: "https://m-v-t.com",
     brandColor: "#c02125",
     socialMedia: {
       facebook: {
@@ -53,7 +53,7 @@ const companies: Record<CompanyKey, Company> = {
     id: "BORDER_TIRE",
     name: "Border Tire",
     logoURL: "https://saprodmrktngemailsigw2.blob.core.windows.net/assets/border-tire/logo.png",
-    websiteURL: "www.border-tire.com",
+    websiteURL: "https://border-tire.com",
     brandColor: "#D14905",
     socialMedia: {
       facebook: {
@@ -78,7 +78,7 @@ const companies: Record<CompanyKey, Company> = {
     id: "BORDER_INTERNATIONAL",
     name: "Border International",
     logoURL: "https://saprodmrktngemailsigw2.blob.core.windows.net/assets/border-international/logo.png",
-    websiteURL: "www.borderint.com",
+    websiteURL: "https://borderint.com/",
     brandColor: "#D14905",
     socialMedia: {
       facebook: {
@@ -99,7 +99,7 @@ const companies: Record<CompanyKey, Company> = {
     id: "STAGECOACH",
     name: "Stagecoach",
     logoURL: "https://saprodmrktngemailsigw2.blob.core.windows.net/assets/stagecoach/logo.png",
-    websiteURL: "www.stagecoachcartage.com",
+    websiteURL: "https://www.stagecoachcartage.com",
     brandColor: "#926c41",
     socialMedia: {
       facebook: {

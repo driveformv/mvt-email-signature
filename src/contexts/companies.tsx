@@ -17,18 +17,13 @@ interface Company {
   >;
 }
 
-type CompanyKey =
-  | "MESILLA_VALLEY_TRANSPORTATION"
-  | "BORDER_TIRE"
-  | "BORDER_INTERNATIONAL"
-  | "STAGECOACH";
+type CompanyKey = "MESILLA_VALLEY_TRANSPORTATION" | "BORDER_TIRE" | "BORDER_INTERNATIONAL" | "STAGECOACH";
 
 const companies: Record<CompanyKey, Company> = {
   MESILLA_VALLEY_TRANSPORTATION: {
     id: "MESILLA_VALLEY_TRANSPORTATION",
     name: "Mesilla Valley Transportation",
-    logoURL:
-      "https://saprodmrktngemailsigw2.blob.core.windows.net/assets/mvt/logo.png",
+    logoURL: "https://saprodmrktngemailsigw2.blob.core.windows.net/assets/mvt/logo.png",
     websiteURL: "www.m-v-t.com",
     brandColor: "#c02125",
     socialMedia: {
@@ -57,8 +52,7 @@ const companies: Record<CompanyKey, Company> = {
   BORDER_TIRE: {
     id: "BORDER_TIRE",
     name: "Border Tire",
-    logoURL:
-      "https://saprodmrktngemailsigw2.blob.core.windows.net/assets/border-tire/logo.png",
+    logoURL: "https://saprodmrktngemailsigw2.blob.core.windows.net/assets/border-tire/logo.png",
     websiteURL: "www.border-tire.com",
     brandColor: "#D14905",
     socialMedia: {
@@ -83,8 +77,7 @@ const companies: Record<CompanyKey, Company> = {
   BORDER_INTERNATIONAL: {
     id: "BORDER_INTERNATIONAL",
     name: "Border International",
-    logoURL:
-      "https://saprodmrktngemailsigw2.blob.core.windows.net/assets/border-international/logo.png",
+    logoURL: "https://saprodmrktngemailsigw2.blob.core.windows.net/assets/border-international/logo.png",
     websiteURL: "www.borderint.com",
     brandColor: "#D14905",
     socialMedia: {
@@ -105,8 +98,7 @@ const companies: Record<CompanyKey, Company> = {
   STAGECOACH: {
     id: "STAGECOACH",
     name: "Stagecoach",
-    logoURL:
-      "https://saprodmrktngemailsigw2.blob.core.windows.net/assets/stagecoach/logo.png",
+    logoURL: "https://saprodmrktngemailsigw2.blob.core.windows.net/assets/stagecoach/logo.png",
     websiteURL: "www.stagecoachcartage.com",
     brandColor: "#926c41",
     socialMedia: {
@@ -120,8 +112,7 @@ const companies: Record<CompanyKey, Company> = {
       },
       linkedin: {
         icon: "https://saprodmrktngemailsigw2.blob.core.windows.net/assets/stagecoach/linkedin-icon.png",
-        source:
-          "https://www.linkedin.com/company/stagecoach-cartage-and-distribution",
+        source: "https://www.linkedin.com/company/stagecoach-cartage-and-distribution",
       },
       tiktok: {
         icon: "https://saprodmrktngemailsigw2.blob.core.windows.net/assets/stagecoach/tiktok-icon.png",
@@ -144,10 +135,7 @@ const CompanyInformationContext = createContext<Company | null>(null);
 const useCompanies = (): Company | null => {
   const context = useContext(CompanyInformationContext);
 
-  if (context === undefined)
-    throw Error(
-      "useCompanies must be used inside company information provider"
-    );
+  if (context === undefined) throw Error("useCompanies must be used inside company information provider");
 
   return context;
 };
@@ -157,17 +145,9 @@ const CompanyInformationProvider = ({
   company,
 }: {
   children: ReactElement;
-  company:
-    | "MESILLA_VALLEY_TRANSPORTATION"
-    | "BORDER_TIRE"
-    | "BORDER_INTERNATIONAL"
-    | "STAGECOACH";
+  company: "MESILLA_VALLEY_TRANSPORTATION" | "BORDER_TIRE" | "BORDER_INTERNATIONAL" | "STAGECOACH";
 }) => {
-  return (
-    <CompanyInformationContext.Provider value={companies[company]}>
-      {children}
-    </CompanyInformationContext.Provider>
-  );
+  return <CompanyInformationContext.Provider value={companies[company]}>{children}</CompanyInformationContext.Provider>;
 };
 
 export default CompanyInformationProvider;

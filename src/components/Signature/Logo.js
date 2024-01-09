@@ -10,13 +10,8 @@ const Logo = () => {
   }[company.id] ?? { width: 80 };
 
   return (
-    <a href={`https://${company.websiteURL}`} target="_blank" rel="noreferrer">
-      <img
-        border="0"
-        src={company.logoURL}
-        alt="Logo"
-        width={logoImgDimension.width}
-      />
+    <a href={company.websiteURL} target="_blank" rel="noreferrer">
+      <img border="0" src={company.logoURL} alt="Logo" width={logoImgDimension.width} />
     </a>
   );
 };
